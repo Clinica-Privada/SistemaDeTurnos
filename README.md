@@ -6,4 +6,6 @@ Después de un montón de intentos logré pushear el commit, lo llamé "v1" y es
 
 En el commit "v1.2" eliminé archios HTML innecesarios que traía la plantilla, además traduje y modifiqué algunos de los archivos que finalmente quedaron para ser utilizados   -Fran.
 
+Subi 3 archivos la base de datos, el diagrama de clases terminado y el diagrama de entidad relacion. Victor
+
 
