@@ -9,5 +9,6 @@ En el commit "v1.2" eliminé archios HTML innecesarios que traía la plantilla, 
 Subi 3 archivos la base de datos, el diagrama de clases terminado y el diagrama de entidad relacion. Victor
 
 En el commit "v1.3" subí los formularios en html del registro (form) y del inicio de sesión (form login). Aún no cuentan con validación de datos   -Fran.
-en el commit "v1.4" estan las clases INCOMPLETAS (faltan relaciones y completar un par de metodos) subamos de a poco ok? :) damn
+
+En el commit "v1.4" estan las clases INCOMPLETAS (faltan relaciones y completar un par de metodos) subamos de a poco ok? :) damn
 
