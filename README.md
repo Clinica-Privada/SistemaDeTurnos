@@ -12,3 +12,7 @@ En el commit "v1.3" subí los formularios en html del registro (form) y del inic
 
 En el commit "v1.4" estan las clases INCOMPLETAS (faltan relaciones y completar un par de metodos) subamos de a poco ok? :) damn
 
+En el commit "v1.5" modifiqué la base de datos que tenía erorres por codificado de caracteres "utf8...etc", además agregué el nombre de la base de datos en application propiertys y arreglé problemas de css en el formulario    -Fran.
+
+
+
