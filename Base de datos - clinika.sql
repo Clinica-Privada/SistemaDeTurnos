@@ -1,83 +1,120 @@
-CREATE DATABASE clinik; 
+
+CREATE DATABASE IF NOT EXISTS clinik;
 USE clinik;
 
 
-CREATE TABLE Usuario(
-    id INT AUTO_INCREMENT PRIMARY KEY,  -- Agregar ID como clave primaria
-    dni VARCHAR(20) UNIQUE NOT NULL,     -- DNI único
-    nombre VARCHAR(50),
-    apellido VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    contraseña VARCHAR(255),
-    rol ENUM('Paciente', 'Admin', 'Profesional') NOT NULL  -- Asegurar que cada usuario tenga un rol
-);
 
-CREATE TABLE Paciente (
-    id INT PRIMARY KEY,  -- Cambiar a clave primaria que será igual al ID de Usuario
-    numeroHistoriaClinica INT,
-    fechaNacimiento DATE,
-    direccion VARCHAR(100),
-    telefono VARCHAR(20),
-    FOREIGN KEY (id) REFERENCES Usuario(id) ON DELETE CASCADE  -- Referencia al ID de Usuario
-);
-
+	
 CREATE TABLE Admin (
-    id INT PRIMARY KEY,  -- Cambiar a clave primaria que será igual al ID de Usuario
+    idAdmin INT PRIMARY KEY,  -- Cambiar a clave primaria que será igual al ID de Usuario
     numeroEmpleado INT,
-    FOREIGN KEY (id) REFERENCES Usuario(id) ON DELETE CASCADE  -- Referencia al ID de Usuario
+    FOREIGN KEY (idAdmin) REFERENCES Usuario(dni) ON DELETE CASCADE  -- Referencia al ID de Usuario
 );
 
-CREATE TABLE Profesional (
-    id INT PRIMARY KEY,  -- Cambiar a clave primaria que será igual al ID de Usuario
-    matricula INT UNIQUE NOT NULL,
-    telefonoProfesional VARCHAR(20) NOT NULL,
-    horarioAtencion TIME,
-    FOREIGN KEY (id) REFERENCES Usuario(id) ON DELETE CASCADE  -- Referencia al ID de Usuario
+CREATE TABLE AdminEspecialidad(
+    idAdmin INT NOT NULL,
+    idEspecialidad INT NOT NULL, 
+    PRIMARY KEY (idAdmin,idEspecialidad),
+    FOREIGN KEY (idAdmin) REFERENCES Admin(idAdmin) ON DELETE CASCADE,
+    FOREIGN KEY (idEspecialidad) REFERENCES Especialidad(idEspecialidad) ON DELETE CASCADE
 );
 
-CREATE TABLE Servicio (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombreServicio VARCHAR(100),
-    descripcion TEXT
+CREATE TABLE AdminServicio(
+    idAdmin INT NOT NULL,
+    idServicio INT NOT NULL,
+    PRIMARY KEY(idAdmin, idServicio),
+    FOREIGN KEY(idAdmin) REFERENCES Admin(idAdmin),
+    FOREIGN KEY(idServicio) REFERENCES Servicio(idServicio)
 );
 
+CREATE TABLE AdminTurno(
+    idAdmin INT NOT NULL,
+    idTurno INT NOT NULL,
+    PRIMARY KEY (idAdmin, idTurno),
+    FOREIGN KEY (idAdmin) REFERENCES Admin(idAdmin) ON DELETE CASCADE,
+    FOREIGN KEY (idTurno) REFERENCES Turno(idTurno) ON DELETE CASCADE
+);
 CREATE TABLE Especialidad (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombreEspecialidad VARCHAR(100),
-    descripcion TEXT
+    idEspecialidad INT AUTO_INCREMENT NOT NULL,
+    nombreEspecialidad VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    idServicio INT NOT NULL,
+    PRIMARY KEY (idEspecialidad),
+    FOREIGN KEY (idServicio) REFERENCES Servicio(idServicio) ON DELETE CASCADE -- Referencia al idServicio de Servicio.
 );
-
-CREATE TABLE ProfesionalEspecialidad (
-    matriculaProfesional INT,
-    idEspecialidad INT,
-    PRIMARY KEY (matriculaProfesional, idEspecialidad),
-    FOREIGN KEY (matriculaProfesional) REFERENCES Profesional(matricula) ON DELETE CASCADE,
-    FOREIGN KEY (idEspecialidad) REFERENCES Especialidad(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Turno (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fechaTurno DATE,
-    horaTurno TIME,
-    idPaciente INT,  -- Cambiado a INT para referenciar id de Paciente
-    idProfesional INT,  -- Cambiado a INT para referenciar id de Profesional
-    idServicio INT,
-    idAdmin INT,  -- Cambiado a INT para referenciar id de Admin
-    estado ENUM('pendiente', 'confirmado', 'cancelado', 'completado') DEFAULT 'pendiente',
-    FOREIGN KEY (idPaciente) REFERENCES Paciente(id) ON DELETE CASCADE,  -- Referencia a id de Paciente
-    FOREIGN KEY (idProfesional) REFERENCES Profesional(id) ON DELETE CASCADE,  -- Referencia a id de Profesional
-    FOREIGN KEY (idServicio) REFERENCES Servicio(id),
-    FOREIGN KEY (idAdmin) REFERENCES Admin(id)  -- Referencia a id de Admin
-);
-
 CREATE TABLE IntervaloHorario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    idIntervaloHorario INT  AUTO_INCREMENT NOT NULL,
     horaInicio TIME NOT NULL,
     horaFin TIME NOT NULL,
     dia ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
-    id_profesional INT,
-    FOREIGN KEY (id_profesional) REFERENCES Profesional(id)  -- Cambiado a INT para referenciar id de Profesional
+    idProfesional INT,
+    PRIMARY KEY (idIntervaloHorario),
+    FOREIGN KEY (idProfesional) REFERENCES Profesional(idProfesional)  -- Cambiado a INT para referenciar id de Profesional
 );
+CREATE TABLE Paciente (
+    idPaciente INT UNIQUE NOT NULL,  -- Cambiar a clave primaria que será igual al ID de Usuario
+    numeroHistoriaClinica INT NOT NULL,
+    PRIMARY KEY (idPaciente),
+    FOREIGN KEY (idPaciente) REFERENCES Usuario(dni) ON DELETE CASCADE  -- Referencia al ID de Usuario
+);
+
+CREATE TABLE Profesional (
+    idProfesional INT NOT NULL,  -- Cambiar a clave primaria que será igual al ID de Usuario
+    matricula INT UNIQUE NOT NULL,
+    PRIMARY KEY(idProfesional),
+    FOREIGN KEY (idProfesional) REFERENCES Usuario(dni) ON DELETE CASCADE  -- Referencia al DNI de Usuario
+);
+
+CREATE TABLE ProfesionalEspecialidad (
+    matriculaProfesional INT NOT NULL,
+    idEspecialidad INT NOT NULL,
+    PRIMARY KEY (matriculaProfesional, idEspecialidad),
+    FOREIGN KEY (matriculaProfesional) REFERENCES Profesional(matricula) ON DELETE CASCADE,
+    FOREIGN KEY (idEspecialidad) REFERENCES Especialidad(idEspecialidad) ON DELETE CASCADE
+);
+
+CREATE TABLE Servicio (
+    idServicio INT AUTO_INCREMENT,
+    nombreServicio VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    PRIMARY KEY (idServicio)
+);
+
+CREATE TABLE Turno (
+    idTurno INT AUTO_INCREMENT NOT NULL ,
+    fechaTurno DATE NOT NULL,
+    horaTurno TIME NOT NULL,
+    idPaciente INT NOT NULL,  -- Cambiado a INT para referenciar id de Paciente
+    idProfesional INT NOT NULL,  -- Cambiado a INT para referenciar id de Profesional
+    idServicio INT NOT NULL,
+    idAdmin INT,  -- Cambiado a INT para referenciar id de Admin
+    estado ENUM('pendiente', 'confirmado', 'cancelado', 'completado') DEFAULT 'pendiente',
+    PRIMARY KEY (idTurno),
+    FOREIGN KEY (idPaciente) REFERENCES Paciente(idPaciente) ON DELETE CASCADE,  -- Referencia a id de Paciente
+    FOREIGN KEY (idProfesional) REFERENCES Profesional(idProfesional) ON DELETE CASCADE,  -- Referencia a id de Profesional
+    FOREIGN KEY (idServicio) REFERENCES Servicio(idServicio),
+    FOREIGN KEY (idAdmin) REFERENCES Admin(idAdmin)  -- Referencia a id de Admin
+);
+
+CREATE TABLE Usuario(
+    dni INT UNIQUE NOT NULL,     -- DNI único
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol ENUM('Paciente', 'Admin', 'Profesional') NOT NULL,  -- Asegurar que cada usuario tenga un rol
+    fechaNacimiento DATE NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    telefono VARCHAR (20) NOT NULL,
+    PRIMARY KEY (dni)
+);
+
+
+
+
+
+
+
 
 DELIMITER //
 
@@ -150,3 +187,4 @@ BEGIN
 END; //
 
 DELIMITER ;
+
