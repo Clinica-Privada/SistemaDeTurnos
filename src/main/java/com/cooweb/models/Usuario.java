@@ -2,12 +2,20 @@ package com.cooweb.models;
 
 import java.util.Date;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
+
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Entity
 @Table(name="usuarios")
@@ -35,8 +43,10 @@ public class Usuario {
 	@Column(name="contraseña")
 	private String contraseña;
 	
+	@Column(name="fechaNacimiento")
 	private Date fechaNacimiento;
 	
+	@Column(name="direccion")
 	private String direccion;
 	
 	//hasta aca atributos
@@ -115,29 +125,8 @@ public class Usuario {
 		public Usuario() {}
 		
 		//constructor con parametros y vacio
-		//y ahora metodos
 		
-		public void registrarse(String email, String password) {
-		    this.nombre = nombre;
-		    this.email = email;
-		    this.contraseña = contraseña;
-		    // Lógica adicional para guardar el usuario en la base de datos
-		    // Si usas un servicio o repositorio, puedes llamar a un método que guarde este objeto en la BD
-		    System.out.println("Usuario registrado exitosamente.");
-		}
-		public boolean iniciarSesion(String email, String password) {
-		    if (this.email.equals(email) && this.contraseña.equals(contraseña)) {
-		        System.out.println("Inicio de sesión exitoso.");
-		        return true;
-		    } else {
-		        System.out.println("Error: email o contraseña incorrectos.");
-		        return false;
-		    }
-		}
-		public void cerrarSesion() {
-		    // Lógica para finalizar la sesión
-		    System.out.println("Sesión cerrada.");
-		}
+		//y ahora metodos
 		
 		public void actualizarDatos(String nuevoNombre, String nuevoEmail, String nuevaContraseña) {
 		    if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
