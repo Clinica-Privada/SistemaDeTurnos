@@ -1,44 +1,65 @@
 package com.cooweb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
-public class Paciente {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	private int numeroHistoriaClinica;
-	
-	//atributos
-	//constructor
-	
-	public Paciente() {}
-	
-	//getters setters
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getNumeroHistoriaClinica() {
-		return numeroHistoriaClinica;
-	}
-	public void setNumeroHistoriaClinica(int numeroHistoriaClinica) {
-		this.numeroHistoriaClinica = numeroHistoriaClinica;
-	}
-	 
-	//metodos
+@Table(name = "paciente") 
+public class Paciente extends Usuario {
+    
+    // Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_paciente")
+    private int idPaciente; 
+    @Column(name="numero_historia_clinica")
+    private int numeroHistoriaClinica;
 
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Turno> turnos;
+
+    // Getters y Setters
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+    
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+    
+    public int getNumeroHistoriaClinica() {
+        return numeroHistoriaClinica;
+    }
+    
+    public void setNumeroHistoriaClinica(int numeroHistoriaClinica) {
+        this.numeroHistoriaClinica = numeroHistoriaClinica;
+    }
+    
+    public Set<Turno> getTurnos() {
+        return turnos;
+    }
+    
+    public void setTurnos(Set<Turno> turnos) {
+        this.turnos = turnos;
+    }
+    
+    // Constructores 
+    public Paciente() {
+    }
+    
+    public Paciente(String nombre, String apellido, String email, String telefono, String password,
+   Date fechaNacimiento, String direccion, int numeroHistoriaClinica) {
+   super(nombre, apellido, email, telefono, password, fechaNacimiento, direccion);
+   this.numeroHistoriaClinica = numeroHistoriaClinica;
+
+    }
+
+    // Métodos
     public void agendarTurno() {
         System.out.println("Agendando turno.");
     }
-   
+    
     public void cancelarTurno() {
         System.out.println("Cancelando turno.");
     }
@@ -58,5 +79,4 @@ public class Paciente {
     public void actualizarInformacionContacto() {
         System.out.println("Actualizando información de contacto.");
     }
-
 }

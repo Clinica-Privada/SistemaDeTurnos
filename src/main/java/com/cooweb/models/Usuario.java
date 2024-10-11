@@ -13,21 +13,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Entity
-@Table(name="usuarios")
+@MappedSuperclass
 public class Usuario {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Id")
-	private Long id;
-	
-	private int dni;
-	
 	@Column(name="nombre")
 	private String nombre;
 	
@@ -40,10 +32,10 @@ public class Usuario {
 	@Column(name="telefono")
 	private String telefono;
 	
-	@Column(name="contraseña")
-	private String contraseña;
+	@Column(name="password")
+	private String password;
 	
-	@Column(name="fechaNacimiento")
+	@Column(name="fecha_nacimiento")
 	private Date fechaNacimiento;
 	
 	@Column(name="direccion")
@@ -51,17 +43,12 @@ public class Usuario {
 	
 	//hasta aca atributos
 
-	public int getDni() {
-		return dni;
+	
+	public String getPassword() {
+		return password;
 	}
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-	public String getContraseña() {
-		return contraseña;
-	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
@@ -74,12 +61,6 @@ public class Usuario {
 	}
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -106,44 +87,22 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 	
-	//hasta aca getters y setters
-	
-	
-	public Usuario(Long id, int dni, String nombre, String apellido, String email, String telefono, String contraseña,
-			Date fechaNacimiento, String direccion) {
-		super();
-		this.id = id;
-		this.dni = dni;
+//constructor con parametros y vacio
+
+	public Usuario() {
+			
+	}
+		
+	public Usuario(String nombre, String apellido, String email, String telefono, String password, Date fechaNacimiento,
+			String direccion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.telefono = telefono;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.fechaNacimiento = fechaNacimiento;
-		this.direccion = direccion; }
-		
-		public Usuario() {}
-		
-		//constructor con parametros y vacio
-		
-		//y ahora metodos
-		
-		public void actualizarDatos(String nuevoNombre, String nuevoEmail, String nuevaContraseña) {
-		    if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
-		        this.nombre = nuevoNombre;
-		    }
-		    if (nuevoEmail != null && !nuevoEmail.isEmpty()) {
-		        this.email = nuevoEmail;
-		    }
-		    if (nuevaContraseña != null && !nuevaContraseña.isEmpty()) {
-		        this.contraseña = nuevaContraseña;
-		    }
-		    System.out.println("Datos actualizados exitosamente.");
-		}
-
-		
-		
-		
+		this.direccion = direccion;
 	}
+}
 
 	

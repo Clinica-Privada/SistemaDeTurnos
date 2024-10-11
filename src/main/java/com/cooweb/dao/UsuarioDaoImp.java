@@ -23,7 +23,7 @@ import java.util.List;
 public class UsuarioDAOImp implements UsuarioDAO{
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+	/* 
 	@Override
 	public List<Usuario> listarTodos() {
 		String query="from Usuario";
@@ -32,13 +32,21 @@ public class UsuarioDAOImp implements UsuarioDAO{
 	}
 	@Override
 	public Usuario leerPorId(int id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'leerPorId'");
+
+			Usuario usuario = entityManager.find(Usuario.class, id);
+			if(usuario == null){
+				throw new RuntimeException("id "+id+" no encontrado.");
+			}
+			return usuario;
+		
 	}
 
 	// Registro
+	
 	@Override
 	public void registrar(Usuario t) {
+		
+		// Valida que el email no esté registrado
 		String query ="FROM Usuario WHERE email= :email";
 		List<Usuario> usuarios = entityManager.createQuery(query)
 								.setParameter("email", t.getEmail())
@@ -46,52 +54,94 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		if(!usuarios.isEmpty()){
 			throw new RuntimeException("El email ya está registrado.");
 		}
-		// Validar que el DNI no esté ya registrado
+
+		// Valida que el DNI no esté ya registrado
 		String queryDNI = "FROM Usuario WHERE dni = :dni";
 		List<Usuario> usuariosPorDNI = entityManager.createQuery(queryDNI)
-								.setParameter("dni", t.getDni())
+								.setParameter("dni", t.getId())
 								.getResultList();
 		
 		if (!usuariosPorDNI.isEmpty()) {
 			throw new RuntimeException("El DNI ya está registrado.");
 		}
 		//Hashear la contraseña antes de guardar
-		String hashedContraseña = BCrypt.hashpw(t.getContraseña(), BCrypt.gensalt());
-		t.setContraseña(hashedContraseña);
+		String hashedPassword = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt());
+		t.setPassword(hashedPassword);
 
 		entityManager.persist(t);
 	}
+
 	@Override
-	public void actualizar(Usuario t) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+	public void actualizar(Usuario usuarioActualizado) {
+		/* 
+		--------------------------------------------------------
+		Agregar coneccion aqui para entender que el usuario esta logeado, caso contrario no deberia dejar hacer nada
+
+		Buscar el usuario existente en la base de datos por su ID
+		--------------------------------------------------------
+		
+		 Usuario usuarioExistente = entityManager.find(Usuario.class, usuarioActualizado.getId());
+		
+		if (usuarioExistente == null) {
+			throw new RuntimeException("Usuario no encontrado.");
+		}
+	
+		// Validar que el nuevo email no esté en uso por otro usuario
+		String query = "FROM Usuario WHERE email = :email AND id != :id";
+		List<Usuario> usuariosConMismoEmail = entityManager.createQuery(query)
+											.setParameter("email", usuarioActualizado.getEmail())
+											.setParameter("id", usuarioActualizado.getId())
+											.getResultList();
+	
+		if (!usuariosConMismoEmail.isEmpty()) {
+			throw new RuntimeException("El email ya está en uso por otro usuario.");
+		}
+	
+		// Actualizar solo los datos que sean permitidos
+		usuarioExistente.setNombre(usuarioActualizado.getNombre());
+		usuarioExistente.setEmail(usuarioActualizado.getEmail());
+		usuarioExistente.setDireccion(usuarioActualizado.getDireccion());
+	
+		// Si la contraseña ha cambiado, se hashea la nueva contraseña
+		if (!usuarioActualizado.getPassword().isEmpty()) {
+			String hashedPassword = BCrypt.hashpw(usuarioActualizado.getPassword(), BCrypt.gensalt());
+			usuarioExistente.setPassword(hashedPassword);
+		}
+	
+		// Guardar los cambios en la base de datos
+		entityManager.merge(usuarioExistente);
 	}
+	
 	@Override
 	public void eliminar(int id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+		try{
+			Usuario usuario = entityManager.find(Usuario.class,id);
+			if (usuario == null){
+				throw new RuntimeException("Usuario no encontrado.");
+			}
+			entityManager.remove(usuario);
+		}catch(Exception e){
+			throw new RuntimeException("Error al intentar eliminar el usuario" + e.getMessage());
+		}
 	}
 
 	//Iniciar Sesion
 	@Override
-	public Usuario iniciarSesion(String email, String contraseña) {
-		String query = "FROM Usuario WHERE email = :email AND password = :password";
+	public Usuario iniciarSesion(String email, String password) {
+		String query = "FROM Usuario WHERE email = :email";
 		List<Usuario> usuarios = entityManager.createQuery(query)
-								.setParameter("email", email)
-								.setParameter("password", contraseña)
-								.getResultList();
-		if (usuarios.isEmpty()){
-			return null; // No se encontro el usuario o las credenciales son incorrectas
+							.setParameter("email", email)
+							.getResultList();
+		if (usuarios.isEmpty()) {
+			return null; // No se encontró el usuario
 		}
 		Usuario usuario = usuarios.get(0);
-   		// Comparar el hash de la contraseña almacenada con la ingresada
-    	if (BCrypt.checkpw(contraseña, usuario.getContraseña())) {
-        return usuario; // Inicio de sesión exitoso
-    	} else {
-        return null; // Contraseña incorrecta
-    	}
+		if (BCrypt.checkpw(password, usuario.getPassword())) {
+			return usuario; // Inicio de sesión exitoso
+		} else {
+			return null; // Contraseña incorrecta
+		}
 	}
-	
 	@Override
 	public void cerrarSesion(HttpServletRequest request, HttpServletResponse response) {
 		// Obtener el usuario autenticado
@@ -104,5 +154,52 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		// Otras lógicas de cierre de sesión, si es necesario
 		System.out.println("Sesión cerrada.");
 	}
-		
+
+
+    */
+
+	@Override
+	public Usuario iniciarSesion(String email, String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'iniciarSesion'");
+	}
+
+	@Override
+	public void cerrarSesion(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'cerrarSesion'");
+	}
+
+	@Override
+	public List<Usuario> listarTodos() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
+	}
+
+	@Override
+	public Usuario leerPorId(int id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'leerPorId'");
+	}
+
+	@Override
+	public void registrar(Usuario t) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'registrar'");
+	}
+
+	@Override
+	public void actualizar(Usuario t) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+	}
+
+	@Override
+	public void eliminar(int id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+	}
+
+	
+	
 }

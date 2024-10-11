@@ -2,8 +2,14 @@ package com.cooweb.dao;
 
 import java.util.List;
 
-import com.cooweb.models.Admin;
+import org.springframework.stereotype.Repository;
 
+import com.cooweb.models.Admin;
+import com.cooweb.models.Reporte;
+
+import jakarta.transaction.Transactional;
+@Repository
+@Transactional
 public class AdminDAOImp implements AdminDAO {
 
     @Override
@@ -41,7 +47,13 @@ public class AdminDAOImp implements AdminDAO {
         // Aquí iría la lógica para crear, editar o eliminar usuarios
         System.out.println("Gestionando usuario.");
     }
-
+    /*
+    
+    dejamos comentados los metodos que se tienen mayor 
+    dificultad por el momento para terminar el proyecto
+    
+    ----------------------------------------------------
+    
     @Override
     public void gestionarServicio() {
         // Aquí se definiría la lógica para crear, editar o eliminar servicios
@@ -53,6 +65,10 @@ public class AdminDAOImp implements AdminDAO {
         // Aquí se definirían los horarios del profesional
         System.out.println("Definiendo horario de atención.");
     }
+    
+    ----------------------------------------------------
+
+    */
 
     @Override
     public void gestionarEspecialidad() {
@@ -67,9 +83,10 @@ public class AdminDAOImp implements AdminDAO {
     }
 
     @Override
-    public void recibirReporte() {
-        // Aquí iría la lógica para recibir y procesar reportes
+    public Reporte recibirReporte() {
+        Reporte reporte = new Reporte();
         System.out.println("Recibiendo reporte.");
+        return reporte;
     }
     
 }

@@ -2,97 +2,122 @@ package com.cooweb.models;
 
 import java.sql.Time;
 import java.util.Date;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "turno") 
 public class Turno {
-	
-	private int idTurno;
-	private Date fechaTurno;
-	private Time horaTurno;
-	private int idPaciente;
-	private int idProfesional;
-	private int idServicio;
-	private int idAdmin;
-	
-	private enum estadoTurno {
-		pendiente, confirmado, cancelado, completado
-		
-	}
-	
 
-	public Turno () {}
-	
-	public Turno(int idTurno, Date fechaTurno, Time horaTurno, int idPaciente, int idProfesional, int idServicio,
-			int idAdmin) {
-		super();
-		this.idTurno = idTurno;
-		this.fechaTurno = fechaTurno;
-		this.horaTurno = horaTurno;
-		this.idPaciente = idPaciente;
-		this.idProfesional = idProfesional;
-		this.idServicio = idServicio;
-		this.idAdmin = idAdmin;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idTurno")
+    private int idTurno;
 
-	public int getIdTurno() {
-		return idTurno;
-	}
+    @Column(name="fechaTurno")
+    private Date fechaTurno;
 
-	public void setIdTurno(int idTurno) {
-		this.idTurno = idTurno;
-	}
+    @Column(name="horaTurno")
+    private Time horaTurno;
 
-	public Date getFechaTurno() {
-		return fechaTurno;
-	}
+    @ManyToOne // Relación con Paciente
+    @JoinColumn(name = "idPaciente", nullable = false) // Relación obligatoria
+    private Paciente paciente; 
 
-	public void setFechaTurno(Date fechaTurno) {
-		this.fechaTurno = fechaTurno;
-	}
+    @ManyToOne // Relación con Profesional
+    @JoinColumn(name = "idProfesional", nullable = false) // Relación obligatoria
+    private Profesional profesional;
 
-	public Time getHoraTurno() {
-		return horaTurno;
-	}
+    @ManyToOne // Relación con Especialidad
+    @JoinColumn(name = "idEspecialidad", nullable = false) // Relación obligatoria
+    private Especialidad especialidad; // Cambiado de idServicio a especialidad
 
-	public void setHoraturno(Time horaturno) {
-		this.horaTurno = horaturno;
-	}
+    @ManyToOne // Relación con Admin
+    @JoinColumn(name = "idAdmin", nullable = false) // Relación obligatoria
+    private Admin admin;
 
-	public int getIdPaciente() {
-		return idPaciente;
-	}
+    @Enumerated(EnumType.STRING) 
+    @Column(name="estado")
+    private EstadoTurno estadoTurno;
 
-	public void setIdPaciente(int idPaciente) {
-		this.idPaciente = idPaciente;
-	}
+    // Enum de estados del turno
+    public enum EstadoTurno {
+        PENDIENTE, CONFIRMADO, CANCELADO, COMPLETADO
+    }
 
-	public int getIdProfesional() {
-		return idProfesional;
-	}
+    public Turno() {}
 
-	public void setIdProfesional(int idProfesional) {
-		this.idProfesional = idProfesional;
-	}
+    public Turno(Date fechaTurno, Time horaTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Admin admin, EstadoTurno estadoTurno) {
+        this.fechaTurno = fechaTurno;
+        this.horaTurno = horaTurno;
+        this.paciente = paciente;
+        this.profesional = profesional;
+        this.especialidad = especialidad; // Inicializa la especialidad
+        this.admin = admin; // Inicializa el admin
+        this.estadoTurno = estadoTurno; // Inicialización del estado
+    }
 
-	public int getIdServicio() {
-		return idServicio;
-	}
+    // Getters y Setters
+    public int getIdTurno() {
+        return idTurno;
+    }
 
-	public void setIdServicio(int idServicio) {
-		this.idServicio = idServicio;
-	}
+    public void setIdTurno(int idTurno) {
+        this.idTurno = idTurno;
+    }
 
-	public int getIdAdmin() {
-		return idAdmin;
-	}
+    public Date getFechaTurno() {
+        return fechaTurno;
+    }
 
-	public void setIdAdmin(int idAdmin) {
-		this.idAdmin = idAdmin;
-	}
+    public void setFechaTurno(Date fechaTurno) {
+        this.fechaTurno = fechaTurno;
+    }
 
+    public Time getHoraTurno() {
+        return horaTurno;
+    }
 
+    public void setHoraTurno(Time horaTurno) {
+        this.horaTurno = horaTurno;
+    }
 
-	public String getfechaTurno() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Profesional getProfesional() {
+        return profesional;
+    }
+
+    public void setProfesional(Profesional profesional) {
+        this.profesional = profesional;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public EstadoTurno getEstadoTurno() {
+        return estadoTurno;
+    }
+
+    public void setEstadoTurno(EstadoTurno estadoTurno) {
+        this.estadoTurno = estadoTurno;
+    }
 }
