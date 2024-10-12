@@ -16,5 +16,7 @@ En el commit "v1.5" modifiqué la base de datos que tenía erorres por codificad
 
 En el commit "1.9. se cambio la variable contraseña por password por posibles futuros problemas.
 
+En el commit "v1.10" se hicieron avances sobre los archivos html y js para comenzar la conexión de formulario con base de datos. Aún hay errores por problemas de persistencia en tablas de base de datos  -Fran.
+
 
 
