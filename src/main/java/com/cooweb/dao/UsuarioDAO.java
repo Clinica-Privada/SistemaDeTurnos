@@ -2,7 +2,7 @@ package com.cooweb.dao;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
+
 
 import org.springframework.stereotype.Repository;
 

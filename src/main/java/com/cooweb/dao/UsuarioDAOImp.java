@@ -1,11 +1,6 @@
 package com.cooweb.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import com.cooweb.models.Usuario;
 

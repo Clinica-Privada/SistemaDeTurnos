@@ -16,13 +16,13 @@ import com.cooweb.models.Usuario;
 public class UsuarioController {
 	@Autowired
 	private UsuarioDAO usuarioDao;
-	/* 
+	
 	@RequestMapping(value="api/usuarios")
 	public List<Usuario> listarTodos(){
 		List<Usuario> user=usuarioDao.listarTodos();
 		return user;
 	}
-		*/
+	
 	
 	@RequestMapping(value = "api/login", method = RequestMethod.POST) 
 	public Usuario login(@RequestParam String email, @RequestParam String contraseña) {

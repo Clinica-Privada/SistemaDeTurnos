@@ -1,15 +1,7 @@
 package com.cooweb.dao;
 
 import java.util.List;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Repository;
-
-import com.cooweb.models.Usuario;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +14,7 @@ import com.cooweb.models.Turno;
 @Repository
 @Transactional
 public class PacienteDAOImp implements PacienteDAO{
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -74,35 +67,24 @@ public class PacienteDAOImp implements PacienteDAO{
 		throw new UnsupportedOperationException("Unimplemented method 'actualizarInformacionContacto'");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Paciente> listarTodos() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
+	@Transactional 
+	public List<Paciente> getPacientes(){
+		String query="FROM Paciente";
+		List<Paciente> resultado = entityManager.createQuery(query).getResultList();
+		return resultado;   
 	}
-
 	@Override
-	public Paciente leerPorId(int id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'leerPorId'");
-	}
-
-	@Override
-	public void registrar(Paciente t) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'registrar'");
-	}
-
-	@Override
-	public void actualizar(Paciente t) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
-	}
-
-	@Override
-	public void eliminar(int id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
-	}
 	
-	
+	public void eliminar(Long id){
+		Paciente paciente=entityManager.find(Paciente.class, id);
+		entityManager.remove(paciente);
+	}
+
+	@Override
+	public void registrar(Paciente paciente){
+		entityManager.merge(paciente);
+	}
+
 }
