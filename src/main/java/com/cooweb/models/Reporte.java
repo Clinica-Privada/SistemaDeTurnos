@@ -22,16 +22,16 @@ public class Reporte {
     @Column(name = "contenido")
     private String contenido;
 
-    @Column(name = "fecha")
-    private LocalDate fecha;
+    @Column(name = "fechaReporte")
+    private LocalDate fechaReporte;
 
     @ManyToOne
     @JoinColumn(name = "idProfesional")
-    private Profesional profesional; // Relación con Profesional
+    private Profesional idProfesional; // Relación con Profesional
 
     @ManyToOne
     @JoinColumn(name = "idAdmin") // Relación con Admin
-    private Admin admin; // Relación con Admin
+    private Admin idAdmin; // Relación con Admin
 
     // Getters y Setters
     public int getIdReporte() {
@@ -51,27 +51,27 @@ public class Reporte {
     }
 
     public LocalDate getFecha() {
-        return fecha;
+        return fechaReporte;
     }
 
     public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+        this.fechaReporte = fecha;
     }
 
     public Profesional getProfesional() {
-        return profesional;
+        return idProfesional;
     }
 
-    public void setProfesional(Profesional profesional) {
-        this.profesional = profesional;
+    public void setProfesional(Profesional idProfesional) {
+        this.idProfesional = idProfesional;
     }
 
     public Admin getAdmin() {
-        return admin;
+        return idAdmin;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setAdmin(Admin idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     // Constructor por defecto
@@ -79,10 +79,10 @@ public class Reporte {
     }
 
     // Constructor con parámetros
-    public Reporte(String contenido, LocalDate fecha, Profesional profesional, Admin admin) {
+    public Reporte(String contenido, LocalDate fechaReporte, Profesional idProfesional, Admin idAdmin) {
         this.contenido = contenido;
-        this.fecha = fecha;
-        this.profesional = profesional;
-        this.admin = admin;
+        this.fechaReporte = fechaReporte;
+        this.idProfesional = idProfesional;
+        this.idAdmin = idAdmin;
     }
 }

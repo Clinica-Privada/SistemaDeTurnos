@@ -1,7 +1,10 @@
 package com.cooweb.models;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
+import com.cooweb.models.Profesional;
 
 @Entity
 @Table(name = "especialidad") 
@@ -16,20 +19,32 @@ public class Especialidad {
     @Column(name="descripcion")
     private String descripcion;
     
-    @ManyToOne
-    @JoinColumn(name = "idProfesional", referencedColumnName = "idProfesional", nullable = false)
-    private Profesional profesional; // Relación con Profesional
+    @OneToMany(mappedBy = "especialidad")
+    private List<Profesional> profesionales; // Lista de profesionales relacionados con esta especialidad
 
-
+    
     @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AdminEspecialidad> adminEspecialidades;
 
     public Especialidad() {}
 
-    public Especialidad(int id, String nombreEspecialidad, String descripcion, int idServicio) {
+    public Especialidad(int idEspecialidad, String nombreEspecialidad, String descripcion) {
         this.idEspecialidad = idEspecialidad;
         this.nombreEspecialidad = nombreEspecialidad;
         this.descripcion = descripcion;
+    }
+
+    
+
+
+
+    public Especialidad(int idEspecialidad, String nombreEspecialidad, String descripcion,
+            List<Profesional> profesionales, Set<AdminEspecialidad> adminEspecialidades) {
+        this.idEspecialidad = idEspecialidad;
+        this.nombreEspecialidad = nombreEspecialidad;
+        this.descripcion = descripcion;
+        this.profesionales = profesionales;
+        this.adminEspecialidades = adminEspecialidades;
     }
 
     // Getters y Setters

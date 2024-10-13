@@ -1,9 +1,6 @@
 package com.cooweb.dao;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.cooweb.models.Paciente;
 
 import com.cooweb.models.Turno;
@@ -21,10 +18,11 @@ public interface PacienteDAO {
     void consultarTurno();
     void suscribirseNotificaciones();
     void consultarHistorial();
-    void actualizarInformacionContacto();
-    
+    Paciente actualizarInformacionContacto(int idPaciente, String nombre, String email, String telefono, String password, String direccion);
+    Paciente findByEmail(String email);
     List<Paciente> getPacientes();
-    void eliminar(Long id);
+    List<Paciente> getCorreos(String email);
+    void eliminar(int id);
     void registrar(Paciente paciente);
 
 }

@@ -15,6 +15,10 @@ public class Profesional extends Usuario {
     @Column(name="matricula")
     private int matricula;
 
+    @ManyToOne
+    @JoinColumn(name = "idEspecialidad") // La FK hacia Especialidad
+    private Especialidad especialidad;
+    
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<IntervaloHorario> intervalos;
 
