@@ -18,5 +18,5 @@ En el commit "1.9. se cambio la variable contraseña por password por posibles f
 
 En el commit "v1.10" se hicieron avances sobre los archivos html y js para comenzar la conexión de formulario con base de datos. Aún hay errores por problemas de persistencia en tablas de base de datos  -Fran.
 
-
+En el commit "v1.11" El formulario de registro ya está funcional, aún falta hacer funcionar el dataTable  -Fran.
 
