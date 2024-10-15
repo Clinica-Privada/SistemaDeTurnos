@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    font-family: sans-serif;
+}
+
+
+header{
+    height: 15vh;
+    width: 100%;
+    background-color: #303F9F;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+nav{
+    height: 40%;
+    background-color: #3F51B5;
+    width: 92%;
+}
+
+.actual{
+    
+}
+
+.logo{
+    width: 8%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-align: center;
+    
+}
+
+.logo img{
+    height: 100%;
+    width: auto;
+}
+
+header ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    height: 100%;
+    width: auto;
+    padding-left: 4vh;
+    padding-right: 4vh;
+}
+
+header li{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+main{
+    padding: 10vh;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #212121;
+}
+
+h1{
+    color: #009688;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 50vh;
+    height: auto;
+}
+
+.formitem{
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.formitem a{
+    width: 100%;
+    color: #009688;
+    text-decoration-line: none;
+    text-align: center;
+}
+
+
+input{
+    height: 6vh;
+    margin: 1vh;
+    padding-left: 2vh;
+
+    border-radius: 1vh;
+}
+
+.mitad{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.mitad input{
+    width: 50%;
+}
+
+
+.rememberme{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer{
+    height: auto;
+    width: auto;
+
+    background-color: #3F51B5;
+    color: white;
+    padding: 0vh;
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+.footercol{
+    width: 33.33%;
+    padding: 3vh;
+}
+
+.button{
+    background-color: #009688;
+    color: white;
+}
