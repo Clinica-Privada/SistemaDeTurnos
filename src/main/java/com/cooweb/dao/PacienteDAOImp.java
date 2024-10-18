@@ -87,7 +87,7 @@ public class PacienteDAOImp implements PacienteDAO{
 	@Override
 	@Transactional 
 	public List<Paciente> getPacientes(){
-		String query="FROM Paciente";
+		String query="from Paciente";
 		List<Paciente> resultado = entityManager.createQuery(query).getResultList();
 		return resultado;   
 	}

@@ -22,19 +22,19 @@
         <h1>Crear Cuenta</h1>
         <form action="">
             <div class="mitad">
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Apellido">
+                <input type="text" id="txtNombre" placeholder="Nombre">
+                <input type="text" id="txtApellido" placeholder="Apellido">
             </div>
-            <input type="text" placeholder="DNI">
-            <input type="email" name="email" id=""  placeholder="email">
+            <input type="email" name="email" id="txtEmail"  placeholder="email">
             <input type="text" name="telefono" id="txtTelefono"  placeholder="Teléfono">
             <input type="text" name="direccion" id="txtDireccion"  placeholder="Dirección">
-            <input type="date" name="" id="">
+            <input type="date" name="" id="txtDate">
             <div class="mitad">
-                <input type="password" name="password" id="" placeholder="Crear Contraseña">
-                <input type="password" name="password" id="" placeholder="Repetir Contraseña">
+                <input type="password" name="password" id="txtPassword" placeholder="Crear Contraseña">
+                <input type="password" name="password" id="txtRepetirPassword" placeholder="Repetir Contraseña">
             </div>
-            <input type="submit" value="Registrarme" class="button">
+            <input type="submit" onclick="registrarPaciente()" value="Registrarme" class="button">
+			<script src="./js/registrar.js"></script>
             <div class="formitem">
                 <a href="#">¿Olvidaste tu contraseña?</a>
                 <a href="#">¿Ya tenés una cuenta? Inicia Sesión!</a>
