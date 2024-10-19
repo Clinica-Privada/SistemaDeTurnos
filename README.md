@@ -18,5 +18,8 @@ En el commit "1.9" se cambio la variable contraseña por password por posibles f
 
 En el commit "1.10" se corrigieron algunos metodos de la clase principal y se actualizo el diagrama de clases. Victor
 
+En el commit "v1.16" se devolvieron las implementaciones a la vesión 1.10 para evitar erores de conexión, además se incluyó el hasheo de password y la vesión final del diccionario de variables    -Fran(ñ).
+
+
 
 
