@@ -8,9 +8,9 @@ $(document).ready(function() {
 
 
 
-async function getPacientes(){
+async function getTurnos(){
 	
-  const request = await fetch('api/pacientes', {
+  const request = await fetch('api/turnos', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
