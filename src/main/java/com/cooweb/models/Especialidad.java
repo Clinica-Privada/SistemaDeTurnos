@@ -12,10 +12,10 @@ public class Especialidad {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática del ID
-    @Column(name="id_especialidad")
-    private int id_especialidad;
-    @Column(name="nombre_especialidad")
-    private String nombre_especialidad;
+    @Column(name="idEspecialidad")
+    private int idEspecialidad;
+    @Column(name="nombreEspecialidad")
+    private String nombreEspecialidad;
     @Column(name="descripcion")
     private String descripcion;
     
@@ -24,13 +24,13 @@ public class Especialidad {
 
     
     @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AdminEspecialidad> admin_especialidades;
+    private Set<AdminEspecialidad> adminEspecialidades;
 
     public Especialidad() {}
 
-    public Especialidad(int id_especialidad, String nombre_especialidad, String descripcion) {
-        this.id_especialidad = id_especialidad;
-        this.nombre_especialidad = nombre_especialidad;
+    public Especialidad(int idEspecialidad, String nombreEspecialidad, String descripcion) {
+        this.idEspecialidad = idEspecialidad;
+        this.nombreEspecialidad = nombreEspecialidad;
         this.descripcion = descripcion;
     }
 
@@ -38,22 +38,30 @@ public class Especialidad {
 
 
 
-    public Especialidad(int id_especialidad, String nombre_especialidad, String descripcion,
-            List<Profesional> profesionales, Set<AdminEspecialidad> admin_especialidades) {
-        this.id_especialidad = id_especialidad;
-        this.nombre_especialidad = nombre_especialidad;
+    public Especialidad(int idEspecialidad, String nombreEspecialidad, String descripcion,
+            List<Profesional> profesionales, Set<AdminEspecialidad> adminEspecialidades) {
+        this.idEspecialidad = idEspecialidad;
+        this.nombreEspecialidad = nombreEspecialidad;
         this.descripcion = descripcion;
         this.profesionales = profesionales;
-        this.admin_especialidades = admin_especialidades;
+        this.adminEspecialidades = adminEspecialidades;
     }
 
     // Getters y Setters
-    public int getId_especialidad() {
-        return id_especialidad;
+    public int getIdEspecialidad() {
+        return idEspecialidad;
     }
 
-    public void setId_especialidad(int idEspecialidad) {
-        this.id_especialidad = idEspecialidad;
+    public void setIdEspecialidad(int idEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
+    }
+
+    public String getNombreEspecialidad() {
+        return nombreEspecialidad;
+    }
+
+    public void setNombreEspecialidad(String nombreEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
     }
 
     public String getDescripcion() {
@@ -64,30 +72,12 @@ public class Especialidad {
         this.descripcion = descripcion;
     }
 
-    public String getNombre_especialidad() {
-        return nombre_especialidad;
+
+    public Set<AdminEspecialidad> getAdminEspecialidades() {
+        return adminEspecialidades;
     }
 
-    public void setNombre_especialidad(String nombre_especialidad) {
-        this.nombre_especialidad = nombre_especialidad;
+    public void setAdminEspecialidades(Set<AdminEspecialidad> adminEspecialidades) {
+        this.adminEspecialidades = adminEspecialidades;
     }
-
-    public List<Profesional> getProfesionales() {
-        return profesionales;
-    }
-
-    public void setProfesionales(List<Profesional> profesionales) {
-        this.profesionales = profesionales;
-    }
-
-    public Set<AdminEspecialidad> getAdmin_especialidades() {
-        return admin_especialidades;
-    }
-
-    public void setAdmin_especialidades(Set<AdminEspecialidad> admin_especialidades) {
-        this.admin_especialidades = admin_especialidades;
-    }
-
-
-  
 }

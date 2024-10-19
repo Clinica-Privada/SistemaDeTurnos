@@ -10,13 +10,13 @@ public class AdminEspecialidad {
     private AdminEspecialidadId id;
 
     @ManyToOne
-    @MapsId("id_admin") // Indica que esta relación está vinculada a la clave compuesta
-    @JoinColumn(name = "id_admin", referencedColumnName = "id_admin") // Columna en la tabla de Admin
+    @MapsId("idAdmin") // Indica que esta relación está vinculada a la clave compuesta
+    @JoinColumn(name = "idAdmin", referencedColumnName = "idAdmin") // Columna en la tabla de Admin
     private Admin admin;
 
     @ManyToOne
-    @MapsId("id_especialidad") // Indica que esta relación está vinculada a la clave compuesta
-    @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad") // Columna en la tabla de Especialidad
+    @MapsId("idEspecialidad") // Indica que esta relación está vinculada a la clave compuesta
+    @JoinColumn(name = "idEspecialidad", referencedColumnName = "idEspecialidad") // Columna en la tabla de Especialidad
     private Especialidad especialidad;
 
     // Constructores, getters y setters

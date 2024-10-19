@@ -1,6 +1,4 @@
 package com.cooweb.dao;
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 import com.cooweb.models.Paciente;
@@ -15,16 +13,16 @@ import jakarta.transaction.Transactional;
 public interface PacienteDAO {
     Paciente iniciarSesion(String email, String password);
 	void cerrarSesion(HttpServletRequest request, HttpServletResponse response);
-    Turno agendarTurno(Paciente paciente, Date fecha_turno, Time hora_turno);
+    Turno agendarTurno();
     void cancelarTurno();
     void consultarTurno();
     void suscribirseNotificaciones();
     void consultarHistorial();
-    Paciente actualizarInformacionContacto(int idPaciente, String nombre, String apellido, String dni, String email, String telefono, String password, String direccion);
+    Paciente actualizarInformacionContacto(int idPaciente, String nombre, String email, String telefono, String password, String direccion);
     Paciente findByEmail(String email);
     List<Paciente> getPacientes();
     List<Paciente> getCorreos(String email);
-    void eliminar(int id);
+    void eliminar(int id_paciente);
     void registrar(Paciente paciente);
 
 }
