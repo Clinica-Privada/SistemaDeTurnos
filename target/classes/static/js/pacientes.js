@@ -38,12 +38,12 @@ async function getPacientes(){
 async function eliminarPaciente(id){
 	//alert(id);
 	
-	if(!confirm('Desea eliminar paciente?')){
+	if(!confirm('Desea eliminar paciente?'+id)){
 		return;
 	}
 	
 	
-	const request= await fetch('api/pacientes/'+id, {
+	const request= await fetch('eliminarCuenta/'+id, {
 		method: 'DELETE',
 		headers: {
 			'Accept':'application/json',

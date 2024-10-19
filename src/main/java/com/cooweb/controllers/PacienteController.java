@@ -56,15 +56,15 @@ public class PacienteController {
     public ResponseEntity<?> registrar(@RequestBody Paciente paciente) {
         // Conversión de la fecha de nacimiento
         try {
-            Date fechaNacimiento = paciente.getFechaNacimiento();
+            String fechaNacimiento = paciente.getFecha_nacimiento();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            paciente.setFechaNacimiento(fechaNacimiento);
+            paciente.setFecha_nacimiento(fechaNacimiento);
         } catch (DateTimeParseException e) {
             return ResponseEntity.badRequest().body("Formato de fecha incorrecto. Debe ser dd-MM-yyyy.");
         }
 
         // Validación de negocio: número de historia clínica
-        if (paciente.getNumeroHistoriaClinica() <= 0) {
+        if (paciente.getNumero_historia_clinica() <= 0) {
             return ResponseEntity.badRequest().body("El número de historia clínica debe ser un valor positivo.");
         }
 

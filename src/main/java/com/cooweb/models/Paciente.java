@@ -11,88 +11,71 @@ import java.util.Set;
 public class Paciente extends Usuario {
     
     // Atributos
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_paciente")
-    private int idPaciente;
+    private int id_paciente;
 
-    private LocalDateTime fechaRegistro;
+    @Column(name = "fecha_registro", nullable = false, updatable = false)
+    private LocalDateTime fecha_registro;
 
     @Column(name="numero_historia_clinica", nullable = false)
-    private int numeroHistoriaClinica;
+    private int numero_historia_clinica;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Turno> turnos;
 
     // Getters y Setters
-    public int getIdPaciente() {
-        return idPaciente;
-    }
     
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
-    }
+    // id paciente
     
-    public int getNumeroHistoriaClinica() {
-        return numeroHistoriaClinica;
+    public int getId_paciente() {
+        return id_paciente;
     }
-    
-    public void setNumeroHistoriaClinica(int numeroHistoriaClinica) {
-        this.numeroHistoriaClinica = numeroHistoriaClinica;
+
+    // fecha registro
+
+    public LocalDateTime getFecha_registro() {
+        return fecha_registro;
     }
-    
+
+    public void setFecha_registro(LocalDateTime fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+    // historia clinica 
+    public int getNumero_historia_clinica() {
+        return numero_historia_clinica;
+    }
+
+    public void setNumero_historia_clinica(int numero_historia_clinica) {
+        this.numero_historia_clinica = numero_historia_clinica;
+    }
+
+    // turnos 
     public Set<Turno> getTurnos() {
         return turnos;
     }
-    
     public void setTurnos(Set<Turno> turnos) {
         this.turnos = turnos;
     }
+  
     
     // Constructores 
     public Paciente() {
+
     }
-    
-    
 
     public Paciente(String nombre, String apellido, String dni, String email, String telefono, String password,
-            String fechaNacimiento, String direccion, int idPaciente, int numeroHistoriaClinica, Set<Turno> turnos) {
-        super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
-        this.idPaciente = idPaciente;
-        this.numeroHistoriaClinica = numeroHistoriaClinica;
-        this.turnos = turnos;
-    }
-
-    // Métodos
-    public void agendarTurno() {
-        System.out.println("Agendando turno.");
+        String fecha_nacimiento, String direccion,
+        int numero_historia_clinica) {
+        super(nombre, apellido, dni, email, telefono, password, fecha_nacimiento, direccion);
+        this.fecha_registro = LocalDateTime.now();  // Asegúrate de inicializar aquí
+        this.numero_historia_clinica = numero_historia_clinica;
     }
     
-    public void cancelarTurno() {
-        System.out.println("Cancelando turno.");
-    }
+    
 
-    public void consultarTurno() {
-        System.out.println("Consultando turno.");
-    }
-
-    public void suscribirseNotificaciones() {
-        System.out.println("Suscribiéndose a notificaciones.");
-    }
-
-    public void consultarHistorial() {
-        System.out.println("Consultando historial médico.");
-    }
-
-    public void actualizarInformacionContacto() {
-        System.out.println("Actualizando información de contacto.");
-    }
-
-    public LocalDateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    
+  
 }

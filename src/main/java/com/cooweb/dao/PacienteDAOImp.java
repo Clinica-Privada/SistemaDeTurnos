@@ -1,5 +1,7 @@
 package com.cooweb.dao;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,9 +57,14 @@ public class PacienteDAOImp implements PacienteDAO{
 	}
 
 	@Override
-	public Turno agendarTurno() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'agendarTurno'");
+	public Turno agendarTurno(Paciente paciente, Date fecha_turno, Time hora_turno) {
+		Turno nuevoTurno = new Turno();
+        nuevoTurno.setFecha_turno(fecha_turno);
+        nuevoTurno.setHora_turno(hora_turno);
+        nuevoTurno.setPaciente(paciente);
+        // Guarda el nuevo turno en la base de datos
+        entityManager.persist(nuevoTurno);
+        return nuevoTurno; // Retorna el turno agendado
 	}
 
 	@Override
@@ -101,33 +108,40 @@ public class PacienteDAOImp implements PacienteDAO{
 	}
 
 	@Override
-	public void registrar(Paciente pasiente) {
+	public void registrar(Paciente paciente) {
 		
+
 		// Valida que el email no esté registrado
 		String query ="FROM Paciente WHERE email= :email";
 		@SuppressWarnings("unchecked")
 		List<Paciente> pacientes = entityManager.createQuery(query)
-								.setParameter("email", pasiente.getEmail())
+								.setParameter("email", paciente.getEmail())
 								.getResultList();
 		if(!pacientes.isEmpty()){
 			throw new RuntimeException("El email ya está registrado.");
 		}
-		/* 
+		
 		// Valida que el DNI no esté ya registrado
 		String queryDNI = "FROM Paciente WHERE dni = :dni";
-		List<Usuario> usuariosPorDNI = entityManager.createQuery(queryDNI)
-								.setParameter("dni", t.getId())
+		@SuppressWarnings("unchecked")
+		List<Paciente> pacientesPorDNI = entityManager.createQuery(queryDNI)
+								.setParameter("dni", paciente.getDni())
 								.getResultList();
 		
-		if (!usuariosPorDNI.isEmpty()) {
+		if (!pacientesPorDNI.isEmpty()) {
 			throw new RuntimeException("El DNI ya está registrado.");
 		}
-		*/
+		
 		//Hashear la contraseña antes de guardar
 		
-		pasiente.setPassword(pasiente.getPassword());
+		paciente.setPassword(paciente.getPassword());
 
-		entityManager.persist(pasiente);
+		Paciente nuevoPaciente = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(),
+		paciente.getEmail(), paciente.getTelefono(), paciente.getPassword(),
+		paciente.getFecha_nacimiento(), paciente.getDireccion(),
+		paciente.getNumero_historia_clinica());
+
+		entityManager.persist(nuevoPaciente);
 	}
 
 	@Override
