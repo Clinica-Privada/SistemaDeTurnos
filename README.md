@@ -16,5 +16,5 @@ En el commit "v1.5" modifiqué la base de datos que tenía erorres por codificad
 
 En el commit "1.9. se cambio la variable contraseña por password por posibles futuros problemas.
 
-
+En el commit "1.13" se actualizo lo que tenia Victor con lo que tenia -Fran. en este comit no se puede ejecutar ya que da error por modificaciones que aun no estan impactando en el resto de codigo pero se puede ir avanzando.
 
