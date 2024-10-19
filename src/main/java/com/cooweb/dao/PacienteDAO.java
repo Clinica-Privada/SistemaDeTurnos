@@ -18,7 +18,7 @@ public interface PacienteDAO {
     void consultarTurno();
     void suscribirseNotificaciones();
     void consultarHistorial();
-    Paciente actualizarInformacionContacto(int idPaciente, String nombre, String email, String telefono, String password, String direccion);
+    Paciente actualizarInformacionContacto(int idPaciente, String nombre, String apellido, String dni, String email, String telefono, String password, String direccion);
     Paciente findByEmail(String email);
     List<Paciente> getPacientes();
     List<Paciente> getCorreos(String email);

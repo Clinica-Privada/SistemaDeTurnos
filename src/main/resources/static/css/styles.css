@@ -41,7 +41,7 @@ nav{
     width: auto;
 }
 
-nav ul{
+header ul{
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -60,10 +60,6 @@ header li{
 
 }
 
-.card-header{
-	background-color: #212121;
-	color: #009688;
-}
 
 main{
     padding: 10vh;
@@ -74,47 +70,11 @@ main{
     align-items: center;
 
     background-color: #212121;
-    color: white;
-}
-
-.datosmain{
-    padding: 5vh;
-}
-
-.card-body{
-    background-color: #212121;
-	color: white;
-	padding: 2vh;
-	min-height: 50vh;
 }
 
 h1{
     color: #009688;
 }
-
-h2{
-    color: #009688;
-}
-
-.tabladatos{
-    min-height: 50vh;
-    width: 100%;
-	margin: 0;
-}
-
-table{
-    padding-top: 3vh;
-    width: 100%;
-}
-
-
-thead{
-	min-height: 50vh;
-	height: auto;
-    width: 100%;
-    color: #009688;
-}
-
 
 form{
     display: flex;
@@ -176,17 +136,7 @@ footer{
     flex-direction: row;
 }
 
-.footerdatos{
-	height: auto;
-	width: auto;
 
-	background-color: #3F51B5;
-	color: white;
-	padding: 0vh;
-
-	display: flex;
-	flex-direction: row;
-}
 .footercol{
     width: 33.33%;
     padding: 3vh;

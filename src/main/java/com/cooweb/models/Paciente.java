@@ -1,6 +1,8 @@
 package com.cooweb.models;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,8 +14,11 @@ public class Paciente extends Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_paciente")
-    private int idPaciente; 
-    @Column(name="numero_historia_clinica")
+    private int idPaciente;
+
+    private LocalDateTime fechaRegistro;
+
+    @Column(name="numero_historia_clinica", nullable = false)
     private int numeroHistoriaClinica;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -48,11 +53,14 @@ public class Paciente extends Usuario {
     public Paciente() {
     }
     
-    public Paciente(String nombre, String apellido, String email, String telefono, String password,
-   Date fechaNacimiento, String direccion, int numeroHistoriaClinica) {
-   super(nombre, apellido, email, telefono, password, fechaNacimiento, direccion);
-   this.numeroHistoriaClinica = numeroHistoriaClinica;
+    
 
+    public Paciente(String nombre, String apellido, String dni, String email, String telefono, String password,
+            String fechaNacimiento, String direccion, int idPaciente, int numeroHistoriaClinica, Set<Turno> turnos) {
+        super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
+        this.idPaciente = idPaciente;
+        this.numeroHistoriaClinica = numeroHistoriaClinica;
+        this.turnos = turnos;
     }
 
     // Métodos
@@ -78,5 +86,13 @@ public class Paciente extends Usuario {
 
     public void actualizarInformacionContacto() {
         System.out.println("Actualizando información de contacto.");
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

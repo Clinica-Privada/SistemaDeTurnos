@@ -1,7 +1,7 @@
 package com.cooweb.dao;
 
 import java.util.List;
-
+import java.util.Objects;
 
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
@@ -22,29 +22,31 @@ public class PacienteDAOImp implements PacienteDAO{
 	private EntityManager entityManager;
 
 	@Override
-	public Paciente iniciarSesion(String email, String password) {
-		// Consulta el paciente por email
-		String query = "FROM Paciente WHERE email = :email";
-		@SuppressWarnings("unchecked")
+    public Paciente iniciarSesion(String email, String password) {
+        // Consulta para obtener al paciente por email
+        String query = "FROM Paciente WHERE email = :email";
+        @SuppressWarnings("unchecked")
 		List<Paciente> pacientes = entityManager.createQuery(query)
-									.setParameter("email", email)
-									.getResultList();
-		// Verifica si se encontró algún paciente con ese email
-		if (pacientes.isEmpty()) {
-			throw new RuntimeException("Email no registrado.");
-		}
+                                .setParameter("email", email)
+                                .getResultList();
 
-		// Obtén el paciente encontrado
-		Paciente paciente = pacientes.get(0);
+        // Verificar si se encontró algún paciente con ese email
+        if (pacientes.isEmpty()) {
+            throw new RuntimeException("Email no registrado.");
+        }
+
+        // Obtener el paciente encontrado
+        Paciente paciente = pacientes.get(0);
+
+        // Verificar la contraseña (esto depende de si usas BCrypt o comparación directa)
+        if (!password.equals(paciente.getPassword())) {
+            throw new RuntimeException("Contraseña incorrecta.");
+        }
+
+        // Si la autenticación es exitosa, retorna el paciente
+        return paciente;
+    }
 	
-		// Verifica que la contraseña coincida usando BCrypt
-		if (password != paciente.getPassword()) {
-			throw new RuntimeException("Contraseña incorrecta.");
-		}
-		
-		// Si la autenticación es exitosa, retorna el paciente
-		return paciente;
-	}
 
 	@Override
 	public void cerrarSesion(HttpServletRequest request, HttpServletResponse response) {
@@ -87,7 +89,7 @@ public class PacienteDAOImp implements PacienteDAO{
 	@Override
 	@Transactional 
 	public List<Paciente> getPacientes(){
-		String query="from Paciente";
+		String query="FROM Paciente";
 		List<Paciente> resultado = entityManager.createQuery(query).getResultList();
 		return resultado;   
 	}
@@ -99,13 +101,13 @@ public class PacienteDAOImp implements PacienteDAO{
 	}
 
 	@Override
-	public void registrar(Paciente t) {
+	public void registrar(Paciente pasiente) {
 		
 		// Valida que el email no esté registrado
 		String query ="FROM Paciente WHERE email= :email";
 		@SuppressWarnings("unchecked")
 		List<Paciente> pacientes = entityManager.createQuery(query)
-								.setParameter("email", t.getEmail())
+								.setParameter("email", pasiente.getEmail())
 								.getResultList();
 		if(!pacientes.isEmpty()){
 			throw new RuntimeException("El email ya está registrado.");
@@ -123,9 +125,9 @@ public class PacienteDAOImp implements PacienteDAO{
 		*/
 		//Hashear la contraseña antes de guardar
 		
-		t.setPassword(t.getPassword());
+		pasiente.setPassword(pasiente.getPassword());
 
-		entityManager.persist(t);
+		entityManager.persist(pasiente);
 	}
 
 	@Override
@@ -141,7 +143,7 @@ public class PacienteDAOImp implements PacienteDAO{
     }
 
 	@Override
-	public Paciente actualizarInformacionContacto(int idPaciente, String nombre, String email, String telefono, String password,
+	public Paciente actualizarInformacionContacto(int idPaciente, String nombre,String apellido,String dni, String email, String telefono, String password,
 			String direccion) {
 		String query = "FROM Paciente WHERE idPaciente = :idPaciente";
 		try {
@@ -151,21 +153,24 @@ public class PacienteDAOImp implements PacienteDAO{
 											 .getSingleResult();
 			
 			// Actualizar la información si es diferente
-			if (!paciente.getNombre().equals(nombre)) {
+			if (Objects.equals(paciente.getNombre(), nombre)) {
 				paciente.setNombre(nombre);
 			}
-			if (!paciente.getEmail().equals(email)) {
+			if (Objects.equals(paciente.getApellido(), apellido)) {
+				paciente.setApellido(apellido);
+			}
+			if (Objects.equals(paciente.getEmail(), email)) {
 				if (getCorreos(email).isEmpty()) {
 					paciente.setEmail(email);
 				}
 			}
-			if (!paciente.getTelefono().equals(telefono)) {
+			if (Objects.equals(paciente.getTelefono(), telefono)) {
 				paciente.setTelefono(telefono);
 			}
-			if (!paciente.getPassword().equals(password)) {
+			if (Objects.equals(paciente.getPassword(), password)) {
 				paciente.setPassword(password);
 			}
-			if (!paciente.getDireccion().equals(direccion)) {
+			if (Objects.equals(paciente.getDireccion(), direccion)) {
 				paciente.setDireccion(direccion);
 			}
 			entityManager.merge(paciente); // guarda al paciente en la base de datos 

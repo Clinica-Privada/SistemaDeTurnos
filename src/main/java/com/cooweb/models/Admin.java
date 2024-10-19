@@ -2,6 +2,7 @@ package com.cooweb.models;
 
 import jakarta.persistence.*;
 import java.util.Set;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,16 @@ public class Admin extends Usuario {
 
     // Constructor
     public Admin() {}
+
+    
+    public Admin(String nombre, String apellido, String dni, String email, String telefono, String password,
+            String fechaNacimiento, String direccion, int idAdmin, Especialidad especialidad, List<Reporte> reportes) {
+        super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
+        this.idAdmin = idAdmin;
+        this.especialidad = especialidad;
+        this.reportes = reportes;
+    }
+
 
     // Getters y Setters
     public int getIdAdmin() {

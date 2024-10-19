@@ -12,11 +12,11 @@ public class Profesional extends Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idProfesional")
     private int idProfesional;
-    @Column(name="matricula")
+    @Column(name="matricula", nullable = false)
     private int matricula;
-
+    
     @ManyToOne
-    @JoinColumn(name = "idEspecialidad") // La FK hacia Especialidad
+    @JoinColumn(name = "idEspecialidad", nullable = false ) // La FK hacia Especialidad
     private Especialidad especialidad;
     
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -51,10 +51,16 @@ public class Profesional extends Usuario {
     public Profesional() {
     }
 
-    // Constructor con parámetros (opcional)
-    public Profesional(String nombre, String apellido, String email, String telefono, String password,
-                       Date fechaNacimiento, String direccion, int matricula) {
-        super(nombre, apellido, email, telefono, password, fechaNacimiento, direccion);
+    public Profesional(String nombre, String apellido, String dni, String email, String telefono, String password,
+            String fechaNacimiento, String direccion, int idProfesional, int matricula, Especialidad especialidad,
+            Set<IntervaloHorario> intervalos) {
+        super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
+        this.idProfesional = idProfesional;
         this.matricula = matricula;
+        this.especialidad = especialidad;
+        this.intervalos = intervalos;
     }
+
+    // Constructor con parámetros (opcional)
+    
 }

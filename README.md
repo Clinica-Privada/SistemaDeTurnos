@@ -14,11 +14,7 @@ En el commit "v1.4" estan las clases INCOMPLETAS (faltan relaciones y completar 
 
 En el commit "v1.5" modifiqué la base de datos que tenía erorres por codificado de caracteres "utf8...etc", además agregué el nombre de la base de datos en application propiertys y arreglé problemas de css en el formulario    -Fran.
 
-En el commit "1.9" se cambio la variable contraseña por password por posibles futuros problemas. Victor
-
-En el commit "1.10" se corrigieron algunos metodos de la clase principal y se actualizo el diagrama de clases. Victor
-
-En el commit "1.12" se conectó la página "pacientes.html" ya da el listado de usuarios desde la base de datos. Aún falta implementar la función de eliminarPaciente().  -Fran.
+En el commit "1.9. se cambio la variable contraseña por password por posibles futuros problemas.
 
 
 

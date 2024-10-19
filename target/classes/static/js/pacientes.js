@@ -24,9 +24,9 @@ async function getPacientes(){
   
   for(let paciente of pacientes){
 	
-	let botonEliminar='<a href=¨#¨ onclick="eliminarPaciente('+paciente.numero_historia_clinica +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
-	let usuarioHtml='<tr><td>'+ paciente.id_paciente +'</td><td>' + paciente.nombre + '</td><td>' + paciente.apellido + '</td><td>'
-		+ paciente.email + '</td><td>' + paciente.telefono + '</td><td>' + paciente.direccion+ '</td><td>' + paciente.fecha_nacimiento + '</td><td>' + botonEliminar + '</td></tr>';
+	let botonEliminar='<a href=# onclick="eliminarPaciente('+paciente.numeroHistoriaClinica +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
+	let usuarioHtml='<tr><td>'+ paciente.numeroHistoriaClinica +'</td><td>' + paciente.nombre + '</td><td>' + paciente.apellido + '</td><td>'
+		+ paciente.email + '</td><td>' + paciente.telefono + '</td><td>' + paciente.direccion+ '</td><td>' + paciente.fechaNacimiento + '</td><td>' + botonEliminar + '</td></tr>';
 		
 	listadoHTML+=usuarioHtml;
   }
