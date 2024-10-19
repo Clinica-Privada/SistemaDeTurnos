@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pacientes</title>
+    <title>Mis Turnos</title>
 
     <!-- Custom fonts for this template -->
 	<link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -28,21 +28,22 @@
 </head>
 
 <body id="page-top">
+
 	<header>
-        <div class="logo"><img src="./img/AIVIAN_processed (1).jpg" alt=""></div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="navLinks">Novedades</a></li>
-                <li><a href="servicios.html" class="navLinks">Servicios</a></li>
-                <li><a href="" class="navLinks">Turnos</a></li>
-                <li> <a href="/formlogin.html" class="actual"><b>Iniciar Sesión</b></a></li>
-            </ul>
-        </nav>
-    </header>
+	        <div class="logo"><img src="./img/AIVIAN_processed (1).jpg" alt=""></div>
+	        <nav>
+	            <ul>
+	                <li>Novedades</li>
+	                <li>Servicios</li>
+	                <li class="actual">Turnos</li>
+	                <li><b>Registrarse</b></li>
+	            </ul>
+	        </nav>
+	    </header>
 		<main>
 			<div class="card shadow mb-4">
 				<div class="card-header">
-			    	<h6 class="m-0 font-weight-bold text-primary">Datos de Pacientes</h6>
+			    	<h6 class="m-0 font-weight-bold text-primary">Mis Turnos</h6>
 			    </div>
 			    <div class="card-body">
 			    	<div class="table-responsive">
@@ -50,13 +51,12 @@
 			                <thead>
 			                   <tr>
 			                     	<th>N° Historia Clínica</th>
-			                     	<th>Nombre</th>
-			                     	<th>Apellido</th>
-			                    	<th>Email</th>
-			                     	<th>Telefono</th>
-									<th>Dirección</th>
-									<th>Fecha de Nacimiento</th>
-			                        <th>Acciones</th>
+			                     	<th>Especialidad</th>
+			                     	<th>Profesional</th>
+			                    	<th>Fecha</th>
+			                     	<th>Hora</th>
+									<th>Estado</th>
+			                        <th>Dar de baja</th>
 			                    </tr>
 			                 </thead>
 			                 <tbody>
@@ -132,7 +132,7 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/pacientes.js"></script>
+    <script src="js/turnos.js"></script>
 
 </body>
 

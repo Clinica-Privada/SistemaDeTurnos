@@ -10,13 +10,13 @@ public class AdminTurno {
     private AdminTurnoId id;
 
     @ManyToOne
-    @MapsId("idAdmin") // Indica que esta relación está vinculada a la clave compuesta
-    @JoinColumn(name = "idAdmin", referencedColumnName = "idAdmin") // Columna en la tabla de Admin
+    @MapsId("id_admin") // Indica que esta relación está vinculada a la clave compuesta
+    @JoinColumn(name = "id_admin", referencedColumnName = "id_admin") // Columna en la tabla de Admin
     private Admin admin;
 
     @ManyToOne
-    @MapsId("idTurno") // Indica que esta relación está vinculada a la clave compuesta
-    @JoinColumn(name = "idTurno", referencedColumnName = "idTurno") // Columna en la tabla de Turno
+    @MapsId ("id_turno")// Indica que esta relación está vinculada a la clave compuesta
+    @JoinColumn(name = "id_turno", referencedColumnName = "id_turno") // Columna en la tabla de Turno
     private Turno turno;
 
     // Constructores, getters y setters

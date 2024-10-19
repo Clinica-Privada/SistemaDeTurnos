@@ -41,7 +41,7 @@ public class PacienteController {
     @Autowired
     private PacienteDAO pacienteDao;
 
-    @GetMapping("api/pacientes")
+    @GetMapping("/pacientes")
     public List<Paciente> getPacientes(){
         List<Paciente> user = pacienteDao.getPacientes();
         return user;

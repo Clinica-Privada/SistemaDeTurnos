@@ -10,25 +10,25 @@ public class Profesional extends Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idProfesional")
-    private int idProfesional;
+    @Column(name="id_profesional")
+    private int id_profesional;
     @Column(name="matricula", nullable = false)
     private int matricula;
     
     @ManyToOne
-    @JoinColumn(name = "idEspecialidad", nullable = false ) // La FK hacia Especialidad
+    @JoinColumn(name = "id_especialidad", referencedColumnName ="id_especialidad", nullable = false ) // La FK hacia Especialidad
     private Especialidad especialidad;
     
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<IntervaloHorario> intervalos;
 
     // Getters y Setters
-    public int getIdProfesional() {
-        return idProfesional;
+    public int getId_profesional() {
+        return id_profesional;
     }
 
-    public void setIdProfesional(int idProfesional) {
-        this.idProfesional = idProfesional;
+    public void setId_profesional(int id_profesional) {
+        this.id_profesional = id_profesional;
     }
 
     public int getMatricula() {
@@ -52,10 +52,10 @@ public class Profesional extends Usuario {
     }
 
     public Profesional(String nombre, String apellido, String dni, String email, String telefono, String password,
-            String fechaNacimiento, String direccion, int idProfesional, int matricula, Especialidad especialidad,
+            String fechaNacimiento, String direccion, int id_profesional, int matricula, Especialidad especialidad,
             Set<IntervaloHorario> intervalos) {
         super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
-        this.idProfesional = idProfesional;
+        this.id_profesional = id_profesional;
         this.matricula = matricula;
         this.especialidad = especialidad;
         this.intervalos = intervalos;

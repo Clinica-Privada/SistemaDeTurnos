@@ -8,35 +8,35 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class AdminTurnoId implements Serializable {
-    @Column(name = "idAdmin")
-    private int idAdmin;
+    @Column(name = "id_admin")
+    private int id_admin;
 
-    @Column(name = "idTurno")
-    private int idTurno;
+    @Column(name = "id_turno")
+    private int id_turno;
 
     public AdminTurnoId() {}
 
-    public AdminTurnoId(int idAdmin, int idTurno) {
-        this.idAdmin = idAdmin;
-        this.idTurno = idTurno;
+    public AdminTurnoId(int id_admin, int id_turno) {
+        this.id_admin = id_admin;
+        this.id_turno = id_turno;
     }
 
     // Getters y Setters
 
-    public int getIdAdmin() {
-        return idAdmin;
+    public int getId_admin() {
+        return id_admin;
     }
 
-    public void setIdAdmin(int idAdmin) {
-        this.idAdmin = idAdmin;
+    public void setId_admin(int id_admin) {
+        this.id_admin = id_admin;
     }
 
-    public int getIdTurno() {
-        return idTurno;
+    public int getId_turno() {
+        return id_turno;
     }
 
-    public void setIdTurno(int idTurno) {
-        this.idTurno = idTurno;
+    public void setId_turno(int id_turno) {
+        this.id_turno = id_turno;
     }
 
     // Implementación de hashCode y equals
@@ -45,11 +45,11 @@ public class AdminTurnoId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof AdminTurnoId)) return false;
         AdminTurnoId that = (AdminTurnoId) o;
-        return idAdmin == that.idAdmin && idTurno == that.idTurno;
+        return id_admin == that.id_admin && id_turno == that.id_turno;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAdmin, idTurno);
+        return Objects.hash(id_admin, id_turno);
     }
 }
