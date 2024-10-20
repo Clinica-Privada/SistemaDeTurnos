@@ -20,6 +20,8 @@ En el commit "1.10" se corrigieron algunos metodos de la clase principal y se ac
 
 En el commit "v1.16" se devolvieron las implementaciones a la vesión 1.10 para evitar erores de conexión, además se incluyó el hasheo de password y la vesión final del diccionario de variables    -Fran(ñ).
 
+Se vuelve a la "1.15"  se arreglaron problemas de persistencia, se arreglo el eliminar, la fecha y se agregaron "dni" junto con el registro y "fecha_registro" para documentar cuando se registro el paciente en el sistema, se agregaron funcionalidades en la entidad pasiente para futuras implementaciones.
+
 
 
 
