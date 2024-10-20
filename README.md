@@ -22,6 +22,8 @@ En el commit "v1.16" se devolvieron las implementaciones a la vesión 1.10 para 
 
 Se vuelve a la "1.15"  se arreglaron problemas de persistencia, se arreglo el eliminar, la fecha y se agregaron "dni" junto con el registro y "fecha_registro" para documentar cuando se registro el paciente en el sistema, se agregaron funcionalidades en la entidad paciente para futuras implementaciones.
 
+El commit "v1.17.1" recupera la función de hasheo de password que se perdió en la versión anterior -Fran.
+
 
 
 

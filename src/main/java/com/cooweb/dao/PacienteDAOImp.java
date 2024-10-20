@@ -1,5 +1,7 @@
 package com.cooweb.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -134,7 +136,7 @@ public class PacienteDAOImp implements PacienteDAO{
 		*/
 		//Hashear la contraseña antes de guardar
 		
-		paciente.setPassword(paciente.getPassword());
+		paciente.setPassword(hashFunction(paciente.getPassword()));
 
 		Paciente nuevoPaciente = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(),
 		paciente.getEmail(), paciente.getTelefono(), paciente.getPassword(),
@@ -142,7 +144,20 @@ public class PacienteDAOImp implements PacienteDAO{
 
 		entityManager.persist(nuevoPaciente);
 	}
-
+	
+	public String hashFunction(String password) {
+	    try {
+	        MessageDigest md = MessageDigest.getInstance("SHA-256");
+	        byte[] hashedBytes = md.digest(password.getBytes());
+	        StringBuilder sb = new StringBuilder();
+	        for (byte b : hashedBytes) {
+	            sb.append(String.format("%02x", b));
+	        }
+	        return sb.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        throw new RuntimeException("Error al hashear la contraseña", e);
+	    }}
+	
 	@Override
     public Paciente findByEmail(String email) {
         String query = "FROM Paciente WHERE email = :email";
