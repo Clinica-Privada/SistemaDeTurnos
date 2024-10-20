@@ -4,7 +4,7 @@ $(document).ready(function() {
   
 });
 
-async function registrarPaciente(){
+async function registrarse(){
 	//creamos una variable de tipo array que contenga los datos
 	let datos={};
 	//capturamos los datos con el id de los inputs
@@ -13,9 +13,9 @@ async function registrarPaciente(){
 	datos.email=document.getElementById('txtEmail').value;
 	datos.telefono=document.getElementById('txtTelefono').value;
 	datos.direccion=document.getElementById('txtDireccion').value;
-	datos.date=document.getElementById('txtDate').value;
+	datos.fecha_nacimiento=document.getElementById('fechaNacimiento').value;
 	datos.password=document.getElementById('txtPassword').value;
-
+	datos.dni = document.getElementById('txtDNI').value;
 
 	let repetirPassword=document.getElementById('txtRepetirPassword').value;
 	

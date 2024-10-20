@@ -10,34 +10,34 @@ public class Turno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idTurno")
-    private int idTurno;
+    @Column(name="id_turno")
+    private int id_turno;
 
-    @Column(name="fechaTurno")
-    private Date fechaTurno;
+    @Column(name="fecha_turno")
+    private Date fecha_turno;
 
-    @Column(name="horaTurno")
-    private Time horaTurno;
+    @Column(name="hora_turno")
+    private Time hora_turno;
 
     @ManyToOne // Relación con Paciente
-    @JoinColumn(name = "idPaciente", nullable = false) // Relación obligatoria
+    @JoinColumn(name = "id_paciente", nullable = false) // Relación obligatoria
     private Paciente paciente; 
 
     @ManyToOne // Relación con Profesional
-    @JoinColumn(name = "idProfesional", nullable = false) // Relación obligatoria
+    @JoinColumn(name = "id_profesional", nullable = false) // Relación obligatoria
     private Profesional profesional;
 
     @ManyToOne // Relación con Especialidad
-    @JoinColumn(name = "idEspecialidad", nullable = false) // Relación obligatoria
+    @JoinColumn(name = "id_especialidad", nullable = false) // Relación obligatoria
     private Especialidad especialidad; // Cambiado de idServicio a especialidad
 
     @ManyToOne // Relación con Admin
-    @JoinColumn(name = "idAdmin", nullable = false) // Relación obligatoria
+    @JoinColumn(name = "id_admin", nullable = false) // Relación obligatoria
     private Admin admin;
 
     @Enumerated(EnumType.STRING) 
-    @Column(name="estado")
-    private EstadoTurno estadoTurno;
+    @Column(name="estado_turno")
+    private EstadoTurno estado_turno;
 
     // Enum de estados del turno
     public enum EstadoTurno {
@@ -46,44 +46,64 @@ public class Turno {
 
     public Turno() {}
 
-    public Turno(Date fechaTurno, Time horaTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Admin admin, EstadoTurno estadoTurno) {
-        this.fechaTurno = fechaTurno;
-        this.horaTurno = horaTurno;
+   
+
+    public Turno(int id_turno, Date fecha_turno, Time hora_turno, Paciente paciente, Profesional profesional,
+            Especialidad especialidad, Admin admin, EstadoTurno estado_turno) {
+        this.id_turno = id_turno;
+        this.fecha_turno = fecha_turno;
+        this.hora_turno = hora_turno;
         this.paciente = paciente;
         this.profesional = profesional;
-        this.especialidad = especialidad; // Inicializa la especialidad
-        this.admin = admin; // Inicializa el admin
-        this.estadoTurno = estadoTurno; // Inicialización del estado
+        this.especialidad = especialidad;
+        this.admin = admin;
+        this.estado_turno = estado_turno;
     }
+
+
 
     // Getters y Setters
-    public int getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(int idTurno) {
-        this.idTurno = idTurno;
-    }
-
-    public Date getFechaTurno() {
-        return fechaTurno;
-    }
-
-    public void setFechaTurno(Date fechaTurno) {
-        this.fechaTurno = fechaTurno;
-    }
-
-    public Time getHoraTurno() {
-        return horaTurno;
-    }
-
-    public void setHoraTurno(Time horaTurno) {
-        this.horaTurno = horaTurno;
-    }
+   
 
     public Paciente getPaciente() {
         return paciente;
     }
+
+    public int getId_turno() {
+        return id_turno;
+    }
+
+
+
+    public void setId_turno(int id_turno) {
+        this.id_turno = id_turno;
+    }
+
+
+
+    public Date getFecha_turno() {
+        return fecha_turno;
+    }
+
+
+
+    public void setFecha_turno(Date fecha_turno) {
+        this.fecha_turno = fecha_turno;
+    }
+
+
+
+    public Time getHora_turno() {
+        return hora_turno;
+    }
+
+
+
+    public void setHora_turno(Time hora_turno) {
+        this.hora_turno = hora_turno;
+    }
+
+
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
@@ -113,11 +133,11 @@ public class Turno {
         this.admin = admin;
     }
 
-    public EstadoTurno getEstadoTurno() {
-        return estadoTurno;
+    public EstadoTurno getEstado_turno() {
+        return estado_turno;
     }
 
-    public void setEstadoTurno(EstadoTurno estadoTurno) {
-        this.estadoTurno = estadoTurno;
+    public void setEstado_turno(EstadoTurno estado_turno) {
+        this.estado_turno = estado_turno;
     }
 }

@@ -1,7 +1,9 @@
 package com.cooweb.models;
 
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import java.util.Set;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -10,11 +12,11 @@ public class Admin extends Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idAdmin")
-    private int idAdmin;
+    @Column(name="id_admin")
+    private int id_admin;
 
     @ManyToOne
-    @JoinColumn(name = "idEspecialidad", nullable = false) // La FK hacia Especialidad
+    @JoinColumn(name = "id_especialidad", nullable = false) // La FK hacia Especialidad
     private Especialidad especialidad;
 
     @OneToMany(mappedBy = "idAdmin") // Relación con Reporte
@@ -23,13 +25,23 @@ public class Admin extends Usuario {
     // Constructor
     public Admin() {}
 
-    // Getters y Setters
-    public int getIdAdmin() {
-        return idAdmin;
+    
+    public Admin(String nombre, String apellido,  String dni, String email, String telefono, String password,
+            Date fechaNacimiento, String direccion, int id_admin, Especialidad especialidad, List<Reporte> reportes) {
+        super(nombre, apellido,  dni, email, telefono, password, fechaNacimiento, direccion);
+        this.id_admin = id_admin;
+        this.especialidad = especialidad;
+        this.reportes = reportes;
     }
 
-    public void setIdAdmin(int idAdmin) {
-        this.idAdmin = idAdmin;
+
+    // Getters y Setters
+    public int getId_admin() {
+        return id_admin;
+    }
+
+    public void setId_admin(int id_admin) {
+        this.id_admin = id_admin;
     }
 
     

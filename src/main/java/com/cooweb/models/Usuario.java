@@ -1,5 +1,6 @@
 package com.cooweb.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -12,28 +13,33 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Usuario {
-	@Column(name="nombre")
+	@Column(name="nombre", nullable = false)
 	private String nombre;
 	
-	@Column(name="apellido")
+	@Column(name="apellido", nullable = false)
 	private String apellido;
+    
+	@Column(name="dni", nullable = false)
+	private String dni;
 	
-	@Column(name="email")
+
+	@Column(name="email", nullable = false)
 	private String email;
 	
-	@Column(name="telefono")
+	@Column(name="telefono", nullable = false)
 	private String telefono;
 	
-	@Column(name="password")
+	@Column(name="password", nullable = false)
 	private String password;
 	
-	@Column(name="fecha_nacimiento")
-	private Date fechaNacimiento;
+	@Column(name="fecha_nacimiento", nullable = false)
+	private Date fecha_nacimiento;
+
 	
-	@Column(name="direccion")
+	
+	@Column(name="direccion", nullable = false)
 	private String direccion;
 	
-	//hasta aca atributos
 
 	
 	public String getPassword() {
@@ -42,12 +48,7 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
+
 	public String getDireccion() {
 		return direccion;
 	}
@@ -66,6 +67,14 @@ public class Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -78,23 +87,33 @@ public class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	public Date getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+	public void setFecha_nacimiento(Date fechaNacimiento) {
+		this.fecha_nacimiento = fechaNacimiento;
+	}
 	
 //constructor con parametros y vacio
 
 	public Usuario() {
 			
 	}
-		
-	public Usuario(String nombre, String apellido, String email, String telefono, String password, Date fechaNacimiento,
-			String direccion) {
+	public Usuario(String nombre, String apellido, String dni, String email, String telefono, String password,
+			Date fecha_nacimiento, String direccion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.dni = dni;
 		this.email = email;
 		this.telefono = telefono;
 		this.password = password;
-		this.fechaNacimiento = fechaNacimiento;
+		this.fecha_nacimiento = fecha_nacimiento;
 		this.direccion = direccion;
 	}
+		
+	
+	
+	
 }
 
 	
