@@ -24,6 +24,11 @@ Se vuelve a la "1.15"  se arreglaron problemas de persistencia, se arreglo el el
 
 El commit "v1.17.1" recupera la función de hasheo de password que se perdió en la versión anterior -Fran.
 
+"1.18" Se agregaron validaciones en PacienteController y mejoro la lógica de registro.
+![DNI ya registrado](https://github.com/user-attachments/assets/41029f0c-fc13-434c-b0f4-e231932c8940)
+![Email ya registrado](https://github.com/user-attachments/assets/c9cd0b21-0db4-4e55-a8b1-9bafba67d748)
+![Registro exitoso](https://github.com/user-attachments/assets/d27d27d8-07d1-46f2-9baa-94b8a7a72e74)
+
 
 
 
