@@ -1,13 +1,7 @@
 package com.cooweb.models;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-
-
-
 import jakarta.persistence.Column;
-
 import jakarta.persistence.MappedSuperclass;
 
 
@@ -90,8 +84,8 @@ public class Usuario {
 	public Date getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
-	public void setFecha_nacimiento(Date fechaNacimiento) {
-		this.fecha_nacimiento = fechaNacimiento;
+	public void setFecha_nacimiento(Date fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
 	}
 	
 //constructor con parametros y vacio

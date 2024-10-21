@@ -1,23 +1,9 @@
 package com.cooweb.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.time.ZoneId;
 import java.util.List;
-import java.util.Map;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.time.LocalDateTime; // Para manejar fechas y horas.
-import java.time.format.DateTimeFormatter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,12 +41,23 @@ public class PacienteController {
         pacienteDao.eliminar(id);
     }    
     
-    // En tu método registrar
     @RequestMapping(value="api/pacientes", method=RequestMethod.POST)
-    public void registrar(@RequestBody Paciente paciente) {
-        // Validar que la fecha no sea nula
-    
+    public ResponseEntity<String> registrar(@RequestBody Paciente paciente) {
+            // Verifica si el email ya está registrado
+        if(pacienteDao.emailYaRegistrado(paciente.getEmail())) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+        .body("El email ya está registrado.");
+        }
+
+        // Verifica si el DNI ya está registrado
+        if(pacienteDao.dniYaRegistrado(paciente.getDni())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body("El DNI ya está registrado.");
+        }
+
+        // Si todo está bien, registrar al paciente
         pacienteDao.registrar(paciente);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registro exitoso");
     }
 
     

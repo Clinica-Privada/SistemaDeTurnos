@@ -1,8 +1,6 @@
 package com.cooweb.models;
 
-import java.time.LocalDate;
 import jakarta.persistence.*;
-import java.util.Set;
 import java.util.Date;
 import java.util.List;
 

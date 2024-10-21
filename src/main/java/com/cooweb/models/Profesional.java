@@ -2,7 +2,6 @@ package com.cooweb.models;
 
 import java.util.Date;
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity

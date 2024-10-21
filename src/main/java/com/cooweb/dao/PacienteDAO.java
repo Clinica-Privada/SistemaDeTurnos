@@ -26,5 +26,8 @@ public interface PacienteDAO {
     List<Paciente> getCorreos(String email);
     void eliminar(int id);
     void registrar(Paciente paciente);
+    boolean emailYaRegistrado(String email);
+    boolean dniYaRegistrado(String dni);
+    
 
 }

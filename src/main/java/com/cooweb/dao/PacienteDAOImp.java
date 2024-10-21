@@ -108,42 +108,36 @@ public class PacienteDAOImp implements PacienteDAO{
 		Paciente paciente=entityManager.find(Paciente.class, id);
 		entityManager.remove(paciente);
 	}
+@Override
+public void registrar(Paciente paciente) {
+    // Hashear la contraseña antes de guardar
+    paciente.setPassword(hashFunction(paciente.getPassword()));
 
-	@Override
-	public void registrar(Paciente paciente) {
-		
+    // Crear nuevo paciente
+    Paciente nuevoPaciente = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(),
+    paciente.getEmail(), paciente.getTelefono(), paciente.getPassword(),
+    paciente.getFecha_nacimiento(), paciente.getDireccion());
 
-		// Valida que el email no esté registrado
-		String query ="FROM Paciente WHERE email= :email";
-		@SuppressWarnings("unchecked")
-		List<Paciente> pacientes = entityManager.createQuery(query)
-								.setParameter("email", paciente.getEmail())
-								.getResultList();
-		if(!pacientes.isEmpty()){
-			throw new RuntimeException("El email ya está registrado.");
-		}
-		
-		// Valida que el DNI no esté ya registrado
-		/*String queryDNI = "FROM Paciente WHERE dni = :dni";
-		@SuppressWarnings("unchecked")
-		List<Paciente> pacientesPorDNI = entityManager.createQuery(queryDNI)
-								.setParameter("dni", paciente.getDni())
-								.getResultList();
-		
-		if (!pacientesPorDNI.isEmpty()) {
-			throw new RuntimeException("El DNI ya está registrado.");
-		}
-		*/
-		//Hashear la contraseña antes de guardar
-		
-		paciente.setPassword(hashFunction(paciente.getPassword()));
+    entityManager.persist(nuevoPaciente);
+}
 
-		Paciente nuevoPaciente = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(),
-		paciente.getEmail(), paciente.getTelefono(), paciente.getPassword(),
-		paciente.getFecha_nacimiento(), paciente.getDireccion());
+public boolean emailYaRegistrado(String email) {
+    String query = "FROM Paciente WHERE email = :email";
+    @SuppressWarnings("unchecked")
+    List<Paciente> pacientes = entityManager.createQuery(query)
+                              .setParameter("email", email)
+                              .getResultList();
+    return !pacientes.isEmpty();
+}
 
-		entityManager.persist(nuevoPaciente);
-	}
+public boolean dniYaRegistrado(String dni) {
+    String queryDNI = "FROM Paciente WHERE dni = :dni";
+    @SuppressWarnings("unchecked")
+    List<Paciente> pacientesPorDNI = entityManager.createQuery(queryDNI)
+                              .setParameter("dni", dni)
+                              .getResultList();
+    return !pacientesPorDNI.isEmpty();
+}
 	
 	public String hashFunction(String password) {
 	    try {
