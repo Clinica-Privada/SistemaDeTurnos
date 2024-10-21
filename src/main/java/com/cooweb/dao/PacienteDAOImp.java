@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -102,12 +103,16 @@ public class PacienteDAOImp implements PacienteDAO{
 		List<Paciente> resultado = entityManager.createQuery(query).getResultList();
 		return resultado;   
 	}
-	@Override
 	
-	public void eliminar(int id){
-		Paciente paciente=entityManager.find(Paciente.class, id);
-		entityManager.remove(paciente);
-	}
+	@Override
+public void eliminar(int id) {
+    Paciente paciente = entityManager.find(Paciente.class, id);
+    if (paciente == null) {
+        throw new EntityNotFoundException("Paciente no encontrado con id: " + id);
+    }
+    entityManager.remove(paciente);
+}
+
 @Override
 public void registrar(Paciente paciente) {
     // Hashear la contraseña antes de guardar

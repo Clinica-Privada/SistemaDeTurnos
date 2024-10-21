@@ -1,9 +1,12 @@
 package com.cooweb.controllers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.cooweb.models.Paciente;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -26,7 +30,7 @@ import com.cooweb.dao.PacienteDAO;
 @RestController
 public class PacienteController {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(PacienteController.class);
     @Autowired
     private PacienteDAO pacienteDao;
 
@@ -36,11 +40,6 @@ public class PacienteController {
         return user;
     }
 
-    @RequestMapping(value="api/pacientes/{id}", method=RequestMethod.DELETE)
-    public void eliminar(@PathVariable int id){
-        pacienteDao.eliminar(id);
-    }    
-    
     @RequestMapping(value="api/pacientes", method=RequestMethod.POST)
     public ResponseEntity<String> registrar(@RequestBody Paciente paciente) {
             // Verifica si el email ya está registrado
@@ -109,7 +108,16 @@ public class PacienteController {
         return pacienteActualizado;
     }
 
-
-
-
+    @DeleteMapping("/api/pacientes/{id}")
+    public ResponseEntity<String> eliminarPaciente(@PathVariable int id) {
+        try {
+            pacienteDao.eliminar(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente no encontrado", e);
+        } catch (Exception e) {
+            // Captura cualquier otra excepción y devuelves un 500
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

@@ -1,37 +1,19 @@
 package com.cooweb.models;
 
 import java.util.Date;
-import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
 public class Usuario {
-	@Column(name="nombre", nullable = false)
+	
 	private String nombre;
-	
-	@Column(name="apellido", nullable = false)
 	private String apellido;
-    
-	@Column(name="dni", nullable = false)
-	private String dni;
-	
-
-	@Column(name="email", nullable = false)
+    private String dni;
 	private String email;
-	
-	@Column(name="telefono", nullable = false)
 	private String telefono;
-	
-	@Column(name="password", nullable = false)
 	private String password;
-	
-	@Column(name="fecha_nacimiento", nullable = false)
 	private Date fecha_nacimiento;
-
-	
-	
-	@Column(name="direccion", nullable = false)
 	private String direccion;
 	
 
