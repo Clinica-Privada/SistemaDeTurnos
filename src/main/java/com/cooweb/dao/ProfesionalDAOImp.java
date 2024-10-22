@@ -1,11 +1,15 @@
 package com.cooweb.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cooweb.models.Especialidad;
+import com.cooweb.models.Paciente;
 import com.cooweb.models.Profesional;
 
 
@@ -99,44 +103,59 @@ public class ProfesionalDAOImp implements ProfesionalDAO {
 		if (profesional == null) {
 			throw new EntityNotFoundException("Profesional no encontrado con id: " + id);
 		}
-		entityManager.remove(profesional);}
+		entityManager.remove(profesional);
+	}
 
-    @Override
-    public void registrar(Profesional profesional) {
-        // Hashear la contraseña antes de guardar
+	@Override
+	public void registrar(Profesional profesional) {
+		// Hashear la contraseña antes de guardar
 		profesional.setPassword(hashFunction(profesional.getPassword()));
-
-		// Crear nuevo profesional
-		Profesional nuevoProfesional = new Profesional(profesional.getNombre(), profesional.getApellido(), profesional.getDni(),
-				profesional.getEmail(), profesional.getTelefono(), profesional.getPassword(),
-				profesional.getFecha_nacimiento(), profesional.getDireccion());
-
-		entityManager.persist(nuevoProfesional);
+	
+		// Persistir el nuevo profesional
+		entityManager.persist(profesional);
 	}
 
     @Override
     public String hashFunction(String password) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hashFunction'");
-    }
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] hashedBytes = md.digest(password.getBytes());
+			StringBuilder sb = new StringBuilder();
+			for (byte b : hashedBytes) {
+				sb.append(String.format("%02x", b));
+			}
+			return sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException("Error al hashear la contraseña", e);
+		}
+	}
 
-    @Override
+	@Override
     public boolean emailYaRegistrado(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'emailYaRegistrado'");
-    }
+		String query = "FROM Paciente WHERE email = :email";
+		@SuppressWarnings("unchecked")
+		List<Paciente> pacientes = entityManager.createQuery(query)
+				.setParameter("email", email)
+				.getResultList();
+		return !pacientes.isEmpty();
+	}
 
-    @Override
-    public boolean dniYaRegistrado(String dni) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dniYaRegistrado'");
-    }
+	@Override
+	public boolean dniYaRegistrado(String dni) {
+		String queryDNI = "FROM Paciente WHERE dni = :dni";
+		@SuppressWarnings("unchecked")
+		List<Paciente> pacientesPorDNI = entityManager.createQuery(queryDNI)
+				.setParameter("dni", dni)
+				.getResultList();
+		return !pacientesPorDNI.isEmpty();
+	}
 
     @Override
     public List<Profesional> getCorreos(String email) {
         String query = "FROM Profesional WHERE email = :email";
 		@SuppressWarnings("unchecked")
 		List<Profesional> resultado = entityManager.createQuery(query).setParameter("email", email).getResultList();
-		return resultado;}
+		return resultado;
+	}
 
 }

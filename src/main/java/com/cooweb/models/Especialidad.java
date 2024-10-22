@@ -28,19 +28,13 @@ public class Especialidad {
 
     public Especialidad() {}
 
-    public Especialidad(int id_especialidad, String nombre_especialidad, String descripcion) {
-        this.id_especialidad = id_especialidad;
+    public Especialidad(String nombre_especialidad, String descripcion) {
         this.nombre_especialidad = nombre_especialidad;
         this.descripcion = descripcion;
     }
 
-    
-
-
-
-    public Especialidad(int id_especialidad, String nombre_especialidad, String descripcion,
+    public Especialidad( String nombre_especialidad, String descripcion,
             List<Profesional> profesionales, Set<AdminEspecialidad> admin_especialidades) {
-        this.id_especialidad = id_especialidad;
         this.nombre_especialidad = nombre_especialidad;
         this.descripcion = descripcion;
         this.profesionales = profesionales;

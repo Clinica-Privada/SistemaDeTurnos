@@ -25,11 +25,8 @@ public class Admin extends Usuario {
 
     
     public Admin(String nombre, String apellido,  String dni, String email, String telefono, String password,
-            Date fechaNacimiento, String direccion, int id_admin, Especialidad especialidad, List<Reporte> reportes) {
+            Date fechaNacimiento, String direccion) {
         super(nombre, apellido,  dni, email, telefono, password, fechaNacimiento, direccion);
-        this.id_admin = id_admin;
-        this.especialidad = especialidad;
-        this.reportes = reportes;
     }
 
 

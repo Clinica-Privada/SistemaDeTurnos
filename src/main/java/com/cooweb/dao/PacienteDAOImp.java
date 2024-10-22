@@ -101,7 +101,6 @@ public class PacienteDAOImp implements PacienteDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Paciente> getPacientes() {
 		String query = "FROM Paciente";
 		List<Paciente> resultado = entityManager.createQuery(query).getResultList();
