@@ -8,7 +8,6 @@ import java.util.Objects;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cooweb.models.Especialidad;
 import com.cooweb.models.Paciente;
 import com.cooweb.models.Profesional;
 
@@ -43,8 +42,7 @@ public class ProfesionalDAOImp implements ProfesionalDAO {
 		// Obtener el profesional encontrado
 		Profesional profesional = profesionales.get(0);
 
-		// Verificar la contraseña (esto depende de si usas BCrypt o comparación
-		// directa)
+		// Verificar la contraseña
 		if (!hashFunction(password).equals(profesional.getPassword())) {
 			throw new RuntimeException("Contraseña incorrecta.");
 		}
@@ -155,6 +153,14 @@ public class ProfesionalDAOImp implements ProfesionalDAO {
         String query = "FROM Profesional WHERE email = :email";
 		@SuppressWarnings("unchecked")
 		List<Profesional> resultado = entityManager.createQuery(query).setParameter("email", email).getResultList();
+		return resultado;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Profesional> getProfesional() {
+		String query = "FROM Profesional";
+		List<Profesional> resultado = entityManager.createQuery(query).getResultList();
 		return resultado;
 	}
 

@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Set;
-import com.cooweb.models.Profesional;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "especialidad") 
@@ -19,7 +20,8 @@ public class Especialidad {
     @Column(name="descripcion")
     private String descripcion;
     
-    @OneToMany(mappedBy = "especialidad")
+    @OneToMany(mappedBy = "especialidad",cascade = CascadeType.ALL)
+    @JsonManagedReference // Evitar la recursividad infinita
     private List<Profesional> profesionales; // Lista de profesionales relacionados con esta especialidad
 
     

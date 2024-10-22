@@ -1,5 +1,6 @@
 package com.cooweb.controllers;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,14 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.cooweb.dao.EspecialidadDAO;
 import com.cooweb.dao.ProfesionalDAO;
+import com.cooweb.dto.ProfesionalRequest;
 import com.cooweb.models.Especialidad;
 import com.cooweb.models.Profesional;
 
@@ -92,6 +92,7 @@ public class ProfesionalController {
 
         return profesionalActualizado;
     }
+
     @DeleteMapping("/api/profesional/{id}")
     public ResponseEntity<String> eliminarProfesional(@PathVariable int id) {
         try {
@@ -106,33 +107,48 @@ public class ProfesionalController {
     }
     
     @PostMapping("api/profesional")
-    public ResponseEntity<String> registrar(@RequestBody Profesional profesional) {
+    public ResponseEntity<String> registrar(@RequestBody ProfesionalRequest request) {
         // Verifica si el email ya está registrado
-        if (profesionalDao.emailYaRegistrado(profesional.getEmail())) {
+        if (profesionalDao.emailYaRegistrado(request.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body("El email ya está registrado.");
         }
-        
+
         // Verifica si el DNI ya está registrado
-        if (profesionalDao.dniYaRegistrado(profesional.getDni())) {
+        if (profesionalDao.dniYaRegistrado(request.getDni())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body("El DNI ya está registrado.");
         }
 
-        // Buscar especialidad por ID
-        Especialidad especialidad = especialidadDao.obtenerEspecialidadPorId(profesional.getEspecialidad().getId_especialidad());
+        // Consulta la especialidad por ID
+        Especialidad especialidad = especialidadDao.obtenerEspecialidadPorId(request.getId_especialidad());
         if (especialidad == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Especialidad no encontrada.");
+                .body("La especialidad no existe.");
         }
 
-        // Asignar especialidad al profesional
-        profesional.setEspecialidad(especialidad);
+        // Crea el nuevo profesional
+        Profesional nuevoProfesional = new Profesional(
+            request.getNombre(),
+            request.getApellido(),
+            request.getDni(),
+            request.getEmail(),
+            request.getTelefono(),
+            request.getPassword(),
+            request.getFecha_nacimiento(),
+            request.getDireccion(),
+            especialidad // Asigna la especialidad
+        );
 
-        // Si todo está bien, registrar al profesional
-        profesionalDao.registrar(profesional);
-
+        // registra al profesional
+        profesionalDao.registrar(nuevoProfesional);
         return ResponseEntity.status(HttpStatus.CREATED).body("Registro exitoso");
+    }
+
+    @GetMapping("api/profesional")
+    public List<Profesional> getProfesional(){
+        List<Profesional> user = profesionalDao.getProfesional();
+        return user;
     }
 
 

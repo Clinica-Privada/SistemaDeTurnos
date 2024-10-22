@@ -19,6 +19,7 @@ public interface ProfesionalDAO{
     void eliminar(int id);
     void registrar(Profesional profesional);
     List<Profesional> getCorreos(String email);
+    List<Profesional> getProfesional();
 
     String hashFunction(String password);
     boolean emailYaRegistrado(String email);

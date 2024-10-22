@@ -3,11 +3,14 @@ package com.cooweb.models;
 import java.util.Date;
 import jakarta.persistence.*;
 import java.util.Set;
-import com.cooweb.models.Especialidad;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "profesional") 
 public class Profesional extends Usuario {
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +21,8 @@ public class Profesional extends Usuario {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_especialidad", referencedColumnName ="id_especialidad", nullable = false ) // La FK hacia Especialidad
+    @JsonBackReference
+    @JoinColumn(name = "id_especialidad", referencedColumnName ="id_especialidad") // La FK hacia Especialidad
     private Especialidad especialidad;
     
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -58,18 +62,13 @@ public class Profesional extends Usuario {
 
     }
 
-    public Profesional(String nombre, String apellido, String dni, String email, String telefono, String password,
-            Date fecha_nacimiento, String direccion, Especialidad especialidad) {
-        super(nombre, apellido, dni, email, telefono, password, fecha_nacimiento, direccion);
-        this.matricula = dni;
-        this.especialidad = especialidad;
-    }
-
     // Constructor que recibe id_especialidad
     public Profesional(String nombre, String apellido, String dni, String email, String telefono, String password,
-                       Date fecha_nacimiento, String direccion, int id_especialidad, Especialidad especialidad) {
+                       Date fecha_nacimiento, String direccion, Especialidad especialidad) {
         super(nombre, apellido, dni, email, telefono, password, fecha_nacimiento, direccion);
+        this.matricula = dni;
         this.especialidad = especialidad; // Se asigna el objeto Especialidad
+
     }
 
     // Constructor

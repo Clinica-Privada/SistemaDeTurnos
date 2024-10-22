@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.cooweb.models.Admin;
 import com.cooweb.models.Paciente;
-import com.cooweb.models.Admin;
 import com.cooweb.models.Reporte;
 
 import jakarta.persistence.EntityManager;
