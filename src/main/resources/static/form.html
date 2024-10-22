@@ -13,10 +13,17 @@
         <div class="logo"><img src="./img/AIVIAN_processed (1).jpg" alt=""></div>
         <nav>
             <ul>
-                <li>Novedades</li>
-                <li>Servicios</li>
-                <li>Turnos</li>
-                <li class="actual"><b>Registrarse</b></li>
+                <li><a href="index.html" class="navLinks">Novedades</a></li>
+                <li><a href="servicios.html" class="navLinks">Servicios</a></li>
+                <li>
+                    <select id="turnos" class="turnosDrop" name="turnos" onchange="irAPagina()">
+                        <option value="" disabled selected>Turnos</option>
+                        <option value="formturno.html">Pedir un turno</option>
+                        <option value="misturnos.html">Mis turnos</option>
+                        <script src="./js/scripts.js"></script>
+                    </select>
+                </li>
+                <li> <a href="/formlogin.html" class="actual"><b>Registrarse</b></a></li>
             </ul>
         </nav>
     </header>
@@ -49,9 +56,12 @@
         <div class="footercol">
             <p>
 
-En AIVIAN, nos enfocamos en proporcionar un ambiente cálido y acogedor, donde la atención y el cuidado personalizado sean nuestra prioridad. <br>
-<br>Nuestro objetivo es proporcionar diagnósticos precisos y tratamientos efectivos para mejorar la salud y bienestar de nuestros pacientes. <br>
-<br>Confíe en nosotros para su atención médica. Visítenos en AIVIAN y descubra una experiencia de salud de alta calidad.
+                En AIVIAN, nos enfocamos en proporcionar un ambiente cálido y acogedor, donde la atención y
+                 el cuidado personalizado sean nuestra prioridad. <br>
+                <br>Nuestro objetivo es proporcionar diagnósticos precisos y tratamientos efectivos para 
+                mejorar la salud y bienestar de nuestros pacientes. <br>
+                <br>Confíe en nosotros para su atención médica. Visítenos en AIVIAN y descubra una experiencia
+                de salud de alta calidad.
             </p>
         </div>
         <div class="footercol">

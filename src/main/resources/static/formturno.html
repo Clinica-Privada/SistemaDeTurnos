@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
+    <title>Solicitar Turnos</title>
     <link rel="stylesheet" href="./css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/registrar.js"></script>
+    <script src="./js/turnos.js"></script>
 </head>
 <body>
     <header>
@@ -17,39 +17,59 @@
                 <li><a href="servicios.html" class="navLinks">Servicios</a></li>
                 <li>
                     <select id="turnos" class="turnosDrop" name="turnos" onchange="irAPagina()">
-                        <option value="" disabled selected>Turnos</option>
+                        <option value="" disabled selected  class="actual">Turnos</option>
                         <option value="formturno.html">Pedir un turno</option>
                         <option value="misturnos.html">Mis turnos</option>
                         <script src="./js/scripts.js"></script>
                     </select>
                 </li>
-                <li> <a href="/formlogin.html" class="actual"><b>Registrarse</b></a></li>
+                <li> <a href="/formlogin.html" class="navLinks">Cerrar Sesión</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Crear Cuenta</h1>
-        <form action="">
-            <div class="mitad">
-                <input type="text" id="txtNombre" placeholder="Nombre">
-                <input type="text" id="txtApellido" placeholder="Apellido">
-            </div>
-            <input type="email" name="email" id="txtEmail"  placeholder="email">
-            <input type="text" name="telefono" id="txtTelefono"  placeholder="Teléfono">
-            <input type="text" name="direccion" id="txtDireccion"  placeholder="Dirección">
-            <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha Nacimiento">
-            <input type="text" name="dni" id="txtDNI" placeholder="DNI">
-            <div class="mitad">
-                <input type="password" name="password" id="txtPassword" placeholder="Crear Contraseña">
-                <input type="password" name="password" id="txtRepetirPassword" placeholder="Repetir Contraseña">
-            </div>
-            <input type="submit" onclick="registrarse()" value="Registrarme" class="button">
-			<script src="./js/registrar.js"></script>
-            <div class="formitem">
-                <a href="#">¿Olvidaste tu contraseña?</a>
-                <a href="#">¿Ya tenés una cuenta? Inicia Sesión!</a>
-            </div>
+        <h1>Solicitar un turno</h1>
+        <form action="" class="formTurno">
+            <select id="especialidad" class="solicitarDrop" name="especialidad" onchange="irAPagina()">
+                <option value="" disabled selected>Especialidad</option>
+                <option value="">Pediatría</option>
+                <option value="">Neonatología</option>
+				<option value="">Dermatología</option>
+                <option value="">Ginecología</option>
+                <option value="">Cardiología</option>
+                <option value="">Médico Clínico</option>
+                <option value="">Urología</option>
+				<option value="">Neurología</option>
+				<option value="">Nutrición</option>
+				<option value="">Endocrinología</option>
+				<option value="">Otorrinolaringología</option>
+				<option value="">Odontología</option>
+				<option value="">Oftalmología</option>
+                <script src="./js/scripts.js"></script>
+            </select>
+            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+                <option value="" disabled selected>Elegir Día</option>
+                <option value="">Lunes</option>
+                <option value="">Martes</option>
+                <option value="">Miércoles</option>
+                <option value="">Jueves</option>
+                <option value="">Viernes </option>
+                <option value="">Sábado</oClínicoption>
+                <script src="./js/scripts.js"></script>
+            </select>
+            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+                <option value="" disabled selected>Elegir Horario</option>
+                <option value="">8:00</option>
+                <option value="">9:00</option>
+                <option value="">10:00</option>
+                <option value="">11:00</option>
+                <option value="">12:00</option>
+                <option value="">13:00</oClínicoption>
+                <script src="./js/scripts.js"></script>
+            </select>
 
+            <input type="submit" onclick="confirmarTurno()" value="Solicitar Turno" class="solicitarBoton">
+			<script src="./js/registrar.js"></script>
         </form>
     </main>
     <footer>

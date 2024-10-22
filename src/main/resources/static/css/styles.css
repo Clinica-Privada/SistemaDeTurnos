@@ -80,6 +80,33 @@ header li{
 	color: #009688;
 }
 
+.turnosDrop{
+    color: white;
+    background-color: #3F51B5;
+    font-size: medium;
+    text-decoration: none;
+    border: none;
+}
+
+.formTurno{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    
+}
+.solicitarDrop{
+    height: 5vh;
+    width: 30vw;
+    margin: 2vh;
+    padding: 1vh;
+    background-color: #303F9F;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+}
+
+
+
 main{
     padding: 5vh;
     height: auto;
@@ -212,6 +239,21 @@ form{
     font-size: medium;
 }
 
+.solicitarBoton{
+    height: 5vh;
+    width: 30vw;
+    margin: 2vh;
+    padding: 1vh;
+    background-color: #009688;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+}
+
+.solicitarBoton:hover{
+    background-color: #3F51B5;
+}
+
 input{
     height: 6vh;
     margin: 1vh;
@@ -268,4 +310,5 @@ footer{
 .button{
     background-color: #009688;
     color: white;
+    
 }
