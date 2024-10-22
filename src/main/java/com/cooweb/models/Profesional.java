@@ -13,7 +13,7 @@ public class Profesional extends Usuario {
     @Column(name="id_profesional")
     private int id_profesional;
     @Column(name="matricula", nullable = false)
-    private int matricula;
+    private String matricula;
     
     @ManyToOne
     @JoinColumn(name = "id_especialidad", referencedColumnName ="id_especialidad", nullable = false ) // La FK hacia Especialidad
@@ -31,11 +31,11 @@ public class Profesional extends Usuario {
         this.id_profesional = id_profesional;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -52,15 +52,11 @@ public class Profesional extends Usuario {
     }
 
     public Profesional(String nombre, String apellido, String dni, String email, String telefono, String password,
-            Date fechaNacimiento, String direccion, int id_profesional, int matricula, Especialidad especialidad,
-            Set<IntervaloHorario> intervalos) {
+            Date fechaNacimiento, String direccion) {
         super(nombre, apellido, dni, email, telefono, password, fechaNacimiento, direccion);
-        this.id_profesional = id_profesional;
-        this.matricula = matricula;
-        this.especialidad = especialidad;
-        this.intervalos = intervalos;
+        this.matricula = dni;
     }
 
-    // Constructor con parámetros (opcional)
+    
     
 }

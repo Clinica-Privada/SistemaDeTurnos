@@ -20,7 +20,7 @@ public class Paciente extends Usuario {
     private LocalDateTime fecha_registro;
 
     @Column(name="numero_historia_clinica")
-    private int numero_historia_clinica;
+    private String numero_historia_clinica;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Turno> turnos;
@@ -43,11 +43,11 @@ public class Paciente extends Usuario {
         this.fecha_registro = fecha_registro;
     }
     // historia clinica 
-    public int getNumero_historia_clinica() {
+    public String getNumero_historia_clinica() {
         return numero_historia_clinica;
     }
 
-    public void setNumero_historia_clinica(int numero_historia_clinica) {
+    public void setNumero_historia_clinica(String numero_historia_clinica) {
         this.numero_historia_clinica = numero_historia_clinica;
     }
 
@@ -69,8 +69,10 @@ public class Paciente extends Usuario {
         Date fecha_nacimiento, String direccion) {
         super(nombre, apellido , dni, email, telefono, password, fecha_nacimiento, direccion);
         this.fecha_registro = LocalDateTime.now();  // Asegúrate de inicializar aquí
-
+        this.numero_historia_clinica = dni;
     }
+
+    
     
     
 

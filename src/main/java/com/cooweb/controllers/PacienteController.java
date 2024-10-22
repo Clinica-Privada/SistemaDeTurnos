@@ -85,10 +85,23 @@ public class PacienteController {
             return "redirect:/iniciarSesion?error=true"; // Redirige a la página de login si falla
         }
     }
+    
+    @GetMapping("/cerrarSesion")
+    public String cerrarSesion(HttpServletRequest request) {
+        // Obtener la sesión actual
+        HttpSession session = request.getSession(false); // No crear una nueva sesión
 
-    @PutMapping("api/informacion/{idPaciente}")
+        if (session != null) {
+            session.invalidate(); // Invalida la sesión
+        }
+
+        // Redirigir a la página de inicio de sesión o a la página principal
+        return "redirect:/iniciarSesion"; // 
+    }
+
+    @PutMapping("api/informacion/{id_paciente}")
     public Paciente actualizarInformacionContacto(
-            @PathVariable int idPaciente,
+            @PathVariable int id_paciente,
             @RequestParam String nombre,
             @RequestParam String apellido,
             @RequestParam String dni,
@@ -98,7 +111,7 @@ public class PacienteController {
             @RequestParam String direccion) {
 
         // Llamada al método DAO que actualiza la información de contacto del paciente
-        Paciente pacienteActualizado = pacienteDao.actualizarInformacionContacto(idPaciente, nombre, apellido, dni, email, telefono, password, direccion);
+        Paciente pacienteActualizado = pacienteDao.actualizarInformacionContacto(id_paciente, nombre, apellido, dni, email, telefono, password, direccion);
         
         // Si el paciente no existe (devuelve null), se lanza una excepción
         if (pacienteActualizado == null) {
