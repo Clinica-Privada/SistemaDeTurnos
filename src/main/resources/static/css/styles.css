@@ -1,0 +1,314 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    font-family: sans-serif;
+}
+
+
+header{
+    height: 15vh;
+    width: 100%;
+    background-color: #303F9F;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+nav{
+    height: 40%;
+    background-color: #3F51B5;
+    width: 92%;
+}
+
+.actual{
+    color: #009688;
+    text-decoration: none;
+    
+}
+
+.actual:hover{
+    color: white;
+}
+
+.logo{
+    width: 8%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-align: center;
+    
+}
+
+.logo img{
+    height: 100%;
+    width: auto;
+}
+
+nav ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    height: 100%;
+    width: auto;
+    padding-left: 4vh;
+    padding-right: 4vh;
+}
+
+header li{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navLinks{
+    color: white;
+    text-decoration: none;
+}
+
+.navLinks:hover{
+    color: #009688;
+}
+
+.card-header{
+	background-color: #212121;
+	color: #009688;
+}
+
+.turnosDrop{
+    color: white;
+    background-color: #3F51B5;
+    font-size: medium;
+    text-decoration: none;
+    border: none;
+}
+
+.formTurno{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    
+}
+.solicitarDrop{
+    height: 5vh;
+    width: 30vw;
+    margin: 2vh;
+    padding: 1vh;
+    background-color: #303F9F;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+}
+
+
+
+main{
+    padding: 5vh;
+    height: auto;
+    min-height: 60vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #212121;
+    color: white;
+}
+
+.triple{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 100%;
+
+    font-size: small;
+}
+
+.tercio{
+    padding: 4vh;
+    margin: 2vh;
+    width: 33.33%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2vh;
+    border-color: white;
+    background-color: #3F51B5;
+}
+
+.tercioTitulo{
+    height: 8vh;
+    font-size: small;
+    align-self: center;
+}
+
+.tercioParrafo{
+    height: 23vh;
+}
+
+.tercio p{
+    padding-bottom: 4vh;
+}
+
+.imgTercio{
+    width: 100%;
+    height: auto;
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+.datosmain{
+    padding: 5vh;
+}
+
+.card-body{
+    background-color: #212121;
+	color: white;
+	padding: 2vh;
+	min-height: 50vh;
+}
+
+h1{
+    color: #009688;
+}
+
+h2{
+    color: #009688;
+}
+
+h3{
+    align-self: center;
+    padding-bottom: 2vh;
+    color: #009688;
+}
+
+.tabladatos{
+    min-height: 50vh;
+    width: 100%;
+	margin: 0;
+}
+
+table{
+    padding-top: 3vh;
+    width: 100%;
+}
+
+
+thead{
+	min-height: 50vh;
+	height: auto;
+    width: 100%;
+    color: #009688;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 50vh;
+    height: auto;
+}
+
+.formitem{
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.formitem a{
+    width: 100%;
+    color: #009688;
+    text-decoration-line: none;
+    text-align: center;
+}
+
+.botonLogin{
+    width: 100%;
+    background-color: #009688;
+    color: white;
+    font-size: medium;
+}
+
+.solicitarBoton{
+    height: 5vh;
+    width: 30vw;
+    margin: 2vh;
+    padding: 1vh;
+    background-color: #009688;
+    color: white;
+    border: none;
+    border-radius: 1vh;
+}
+
+.solicitarBoton:hover{
+    background-color: #3F51B5;
+}
+
+input{
+    height: 6vh;
+    margin: 1vh;
+    padding-left: 2vh;
+
+    border-radius: 1vh;
+}
+
+.mitad{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.mitad input{
+    width: 50%;
+}
+
+
+.rememberme{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer{
+    height: auto;
+    width: auto;
+
+    background-color: #3F51B5;
+    color: white;
+    padding: 0vh;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.footerdatos{
+	height: auto;
+	width: auto;
+
+	background-color: #3F51B5;
+	color: white;
+	padding: 0vh;
+
+	display: flex;
+	flex-direction: row;
+}
+.footercol{
+    width: 33.33%;
+    padding: 3vh;
+}
+
+.button{
+    background-color: #009688;
+    color: white;
+    
+}

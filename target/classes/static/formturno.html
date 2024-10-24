@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Turnos</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/turnos.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="./img/AIVIAN_processed (1).jpg" alt=""></div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="navLinks">Novedades</a></li>
+                <li><a href="servicios.html" class="navLinks">Servicios</a></li>
+                <li>
+                    <select id="turnos" class="turnosDrop" name="turnos" onchange="irAPagina()">
+                        <option value="" disabled selected  class="actual">Turnos</option>
+                        <option value="formturno.html">Pedir un turno</option>
+                        <option value="misturnos.html">Mis turnos</option>
+                        <script src="./js/scripts.js"></script>
+                    </select>
+                </li>
+                <li> <a href="/formlogin.html" class="navLinks"><b>Registrarse</b></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Solicitar un turno</h1>
+        <form action="" class="formTurno">
+            <select id="especialidad" class="solicitarDrop" name="especialidad" onchange="irAPagina()">
+                <option value="" disabled selected>Especialidad</option>
+                <option value="">Pediatría</option>
+                <option value="">Neonatología</option>
+				<option value="">Dermatología</option>
+                <option value="">Ginecología</option>
+                <option value="">Cardiología</option>
+                <option value="">Médico Clínico</option>
+                <option value="">Urología</option>
+				<option value="">Neurología</option>
+				<option value="">Nutrición</option>
+				<option value="">Endocrinología</option>
+				<option value="">Otorrinolaringología</option>
+				<option value="">Odontología</option>
+				<option value="">Oftalmología</option>
+                <script src="./js/scripts.js"></script>
+            </select>
+            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+                <option value="" disabled selected>Elegir Día</option>
+                <option value="">Lunes</option>
+                <option value="">Martes</option>
+                <option value="">Miércoles</option>
+                <option value="">Jueves</option>
+                <option value="">Viernes </option>
+                <option value="">Sábado</oClínicoption>
+                <script src="./js/scripts.js"></script>
+            </select>
+            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+                <option value="" disabled selected>Elegir Horario</option>
+                <option value="">8:00</option>
+                <option value="">9:00</option>
+                <option value="">10:00</option>
+                <option value="">11:00</option>
+                <option value="">12:00</option>
+                <option value="">13:00</oClínicoption>
+                <script src="./js/scripts.js"></script>
+            </select>
+
+            <input type="submit" onclick="confirmarTurno()" value="Solicitar Turno" class="solicitarBoton">
+			<script src="./js/registrar.js"></script>
+        </form>
+    </main>
+    <footer>
+        <div class="footercol">
+            <p>
+
+                En AIVIAN, nos enfocamos en proporcionar un ambiente cálido y acogedor, donde la atención y
+                 el cuidado personalizado sean nuestra prioridad. <br>
+                <br>Nuestro objetivo es proporcionar diagnósticos precisos y tratamientos efectivos para 
+                mejorar la salud y bienestar de nuestros pacientes. <br>
+                <br>Confíe en nosotros para su atención médica. Visítenos en AIVIAN y descubra una experiencia
+                de salud de alta calidad.
+            </p>
+        </div>
+        <div class="footercol">
+            <p>
+                Ofrecemos una amplia gama de servicios de estudios clínicos, incluyendo:
+                <br>
+                <br>
+            </p>
+            <ul>
+                <li>Resonancia Magnética (RM)</li>
+                <li>Tomografía Computarizada (TC)</li>
+                <li>Ecografías</li>
+                <li>Endoscopias</li>
+                <li>Análisis Clínicos</li>
+                <li>Electrocardiogramas (ECG)</li>
+                <li>Radiografías Digitales</li>
+            </ul>
+        </div>
+        <div class="footercol">
+            <ul>
+                <li>Ubicación: [Dirección específica], Godoy Cruz, Mendoza</li>
+                <li>Teléfono: [Número de teléfono]</li>
+                <li>Correo electrónico: [Correo electrónico]</li>
+                <li>Horario de atención: [Horario]</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
