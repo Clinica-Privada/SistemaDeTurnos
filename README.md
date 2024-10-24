@@ -30,5 +30,6 @@ El commit "v1.17.1" recupera la función de hasheo de password que se perdió en
 ![Registro exitoso](https://github.com/user-attachments/assets/d27d27d8-07d1-46f2-9baa-94b8a7a72e74)
 
 
+"v1.19" como dice con el puto controlador de mierda espero que funke nos vemos en la mañana cualquier cosa lo arreglamos chau -damn
 
 
