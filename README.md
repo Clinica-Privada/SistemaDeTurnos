@@ -34,4 +34,6 @@ El commit "v1.17.1" recupera la función de hasheo de password que se perdió en
 
 El commit "v1.23" Incluye archivos para login y logout, aún no están funcionales por cuestiones de conexión con la lógica en java -Fran.
 
+El commit "v1.23" suma las imágenes a la carpeta img, seguimos con la entidad turno incompleta y cuando creamos una instancia de turno deja de funcionar la pantalla de "pacientes" -Fran.
+
 
