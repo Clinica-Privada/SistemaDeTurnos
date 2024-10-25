@@ -1,8 +1,8 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
 	
-	getPacientes();
- 	$('#pacientes').DataTable();
+	getTurnos();
+ 	$('#turno').DataTable();
   
 });
 
@@ -27,14 +27,14 @@ async function getTurnos(){
   
   for(let turno of turnos){
 	
-	let botonEliminar='<a href=# onclick="eliminarTurno('+paciente.id_paciente +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
-	let turnoHtml='<tr><td>'+ paciente.numero_historia_clinica +'</td><td>' + turno.especialidad + '</td><td>' + turno.profesional + '</td><td>'
+	let botonEliminar='<a href=# onclick="eliminarTurno('+turno.id_turno +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
+	let turnoHtml='<tr><td>'+ turno.id_turno +'</td><td>' + turno.id_especialidad + '</td><td>' + turno.id_profesional + '</td><td>'
 		+ turno.fecha_turno + '</td><td>' + turno.hora_turno + '</td><td>' + turno.estado_turno+ '</td><td>' + botonEliminar + '</td></tr>';
 		
 	listadoHTML+=turnoHtml;
   }
 
-	document.querySelector('#pacientes tbody').outerHTML=listadoHTML
+	document.querySelector('#turnos tbody').outerHTML=listadoHTML
 }
 
 async function solicitarTurno(){
@@ -67,11 +67,11 @@ async function solicitarTurno(){
 async function eliminarTurno(id_paciente){
 	
 	//alert(id);
-	if(!confirm('Desea eliminar paciente?')){
+	if(!confirm('Desea eliminar turno?')){
 		return;
 	}
 	
-	const request= await fetch('api/pacientes/'+id_paciente, {
+	const request= await fetch('api/turnos/'+id_paciente, {
 		method: 'DELETE',
 		headers: {
 			'Accept':'application/json',

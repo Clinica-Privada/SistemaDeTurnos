@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "paciente") 
 public class Paciente extends Usuario {
@@ -23,6 +25,7 @@ public class Paciente extends Usuario {
     private String numero_historia_clinica;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Turno> turnos;
 
     // Getters y Setters

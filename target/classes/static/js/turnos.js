@@ -1,8 +1,8 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
 	
-	getPacientes();
- 	$('#pacientes').DataTable();
+	getTurnos();
+ 	$('#turno').DataTable();
   
 });
 
@@ -27,23 +27,27 @@ async function getTurnos(){
   
   for(let turno of turnos){
 	
-	let botonEliminar='<a href=# onclick="eliminarTurno('+paciente.id_paciente +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
-	let usuarioHtml='<tr><td>'+ paciente.id_paciente +'</td><td>' + paciente.nombre + '</td><td>' + paciente.apellido + '</td><td>'
-		+ paciente.email + '</td><td>' + paciente.telefono + '</td><td>' + paciente.direccion+ '</td><td>' + paciente.fecha_nacimiento + '</td><td>' + botonEliminar + '</td></tr>';
+	let botonEliminar='<a href=# onclick="eliminarTurno('+turno.id_turno +')" class=¨btn btn-danger btn-circle btn-sm¨><i class="fas fa-trash"></i> </a>';
+	let turnoHtml='<tr><td>'+ turno.id_turno +'</td><td>' + turno.id_especialidad + '</td><td>' + turno.id_profesional + '</td><td>'
+		+ turno.fecha_turno + '</td><td>' + turno.hora_turno + '</td><td>' + turno.estado_turno+ '</td><td>' + botonEliminar + '</td></tr>';
 		
-	listadoHTML+=usuarioHtml;
+	listadoHTML+=turnoHtml;
   }
 
-	document.querySelector('#pacientes tbody').outerHTML=listadoHTML
+	document.querySelector('#turnos tbody').outerHTML=listadoHTML
 }
 
 async function solicitarTurno(){
 	//creamos una variable de tipo array que contenga los datos
 	let datos={};
 	//capturamos los datos con el id de los inputs
-	datos.especialidad=document.getElementById('txtNombre').value;	
-	datos.dia=document.getElementById('txtApellido').value;
-	datos.horario=document.getElementById('txtEmail').value;
+	datos.especialidad=document.getElementById('especialidad').value;	
+	datos.dia=document.getElementById('dia').value;
+	datos.horario=document.getElementById('hora').value;
+	
+	
+	//acá definiremos el estado del turno ...
+	//datos.estado=;
 	
   const request = await fetch('api/turnos', {
     method: 'POST',
@@ -63,11 +67,11 @@ async function solicitarTurno(){
 async function eliminarTurno(id_paciente){
 	
 	//alert(id);
-	if(!confirm('Desea eliminar paciente?')){
+	if(!confirm('Desea eliminar turno?')){
 		return;
 	}
 	
-	const request= await fetch('api/pacientes/'+id_paciente, {
+	const request= await fetch('api/turnos/'+id_paciente, {
 		method: 'DELETE',
 		headers: {
 			'Accept':'application/json',

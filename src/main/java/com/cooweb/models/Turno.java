@@ -2,6 +2,9 @@ package com.cooweb.models;
 
 import java.sql.Time;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +24,7 @@ public class Turno {
 
     @ManyToOne // Relación con Paciente
     @JoinColumn(name = "id_paciente", nullable = false) // Relación obligatoria
+    @JsonBackReference
     private Paciente paciente; 
 
     @ManyToOne // Relación con Profesional
