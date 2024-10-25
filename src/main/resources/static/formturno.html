@@ -30,7 +30,7 @@
     <main>
         <h1>Solicitar un turno</h1>
         <form action="" class="formTurno">
-            <select id="especialidad" class="solicitarDrop" name="especialidad" onchange="irAPagina()">
+            <select id="especialidad" class="solicitarDrop" name="especialidad" onchange="setEspecialidad()">
                 <option value="" disabled selected>Especialidad</option>
                 <option value="">Pediatría</option>
                 <option value="">Neonatología</option>
@@ -47,7 +47,7 @@
 				<option value="">Oftalmología</option>
                 <script src="./js/scripts.js"></script>
             </select>
-            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+            <select id="dia" class="solicitarDrop" name="dia" onchange="setDia()">
                 <option value="" disabled selected>Elegir Día</option>
                 <option value="">Lunes</option>
                 <option value="">Martes</option>
@@ -57,7 +57,7 @@
                 <option value="">Sábado</oClínicoption>
                 <script src="./js/scripts.js"></script>
             </select>
-            <select id="dia" class="solicitarDrop" name="dia" onchange="">
+            <select id="hora" class="solicitarDrop" name="dia" onchange="setHorario()">
                 <option value="" disabled selected>Elegir Horario</option>
                 <option value="">8:00</option>
                 <option value="">9:00</option>
